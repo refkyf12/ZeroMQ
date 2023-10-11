@@ -4,7 +4,9 @@ from stream import streamer
 app = Flask(__name__)
 CAMERAS = [
    (1, "tcp://localhost:5555"),
-   (2, "tcp://localhost:6666")
+   (2, "tcp://localhost:6666"),
+   (3, "tcp://localhost:7777"),
+   (4, "tcp://localhost:8888")
 ]
 
 def gen(id):
@@ -22,4 +24,4 @@ def camera(id):
   return Response(gen(id), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host="0.0.0.0")
