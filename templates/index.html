@@ -18,7 +18,14 @@
             <h3 class="mt-5">Live Streaming</h3>
             <img src="{{ url_for('camera') }}" width="100%">
         </div>
+        <div class="col-lg-8  offset-lg-2">
+            <h3 class="mt-5">Live Streaming</h3>
+            <img src="/camera2" width="100%">
+        </div>
     </div>
 </div>
+<script>
+    setInterval( ()=> window.location.reload(), 3000)
+</script>
 </body>
 </html>
