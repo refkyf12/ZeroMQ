@@ -44,7 +44,7 @@ def detect():
     
     # cap = FileVideoStream(config['cam']).start() # Load Video
     # cap = VideoStream(config['cam']).start()
-    cap = cv2.VideoCapture("rtsp://admin:rastek123@10.50.0.13/cam/realmonitor?channel=1&subtype=00")
+    cap = cv2.VideoCapture("rtsp://admin:YXMOYX@10.50.0.26/cam/realmonitor?channel=1&subtype=00")
     
     with open("coco.names") as f:
         classes = f.read().strip().split('\n')

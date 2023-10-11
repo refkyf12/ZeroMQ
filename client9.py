@@ -44,7 +44,7 @@ def detect():
     
     # cap = FileVideoStream(config['cam']).start() # Load Video
     # cap = VideoStream(config['cam']).start()
-    cap = cv2.VideoCapture("rtsp://admin:rastek123@10.50.0.13/cam/realmonitor?channel=1&subtype=00")
+    cap = cv2.VideoCapture("rtsp://admin:rastek123@10.50.0.2/ISAPI/Streaming/channels/0601/picture")
     
     with open("coco.names") as f:
         classes = f.read().strip().split('\n')
@@ -115,7 +115,7 @@ def output():
     prevTime = 0
     context = zmq.Context()
     footage_socket = context.socket(zmq.PUB)
-    footage_socket.bind('tcp://*:5555')
+    footage_socket.bind('tcp://*:9994')
     
     while True:
         # time.sleep(delay)

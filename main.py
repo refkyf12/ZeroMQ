@@ -6,7 +6,15 @@ CAMERAS = [
    (1, "tcp://localhost:5555"),
    (2, "tcp://localhost:6666"),
    (3, "tcp://localhost:7777"),
-   (4, "tcp://localhost:8888")
+   (4, "tcp://localhost:8888"),
+   (5, "tcp://localhost:9999"),
+   (6, "tcp://localhost:9991"),
+   (7, "tcp://localhost:9992"),
+   (8, "tcp://localhost:9993"),
+   (9, "tcp://localhost:9994"),
+   (10, "tcp://localhost:9995"),
+   (11, "tcp://localhost:9996"),
+   (12, "tcp://localhost:9997")
 ]
 
 def gen(id):
