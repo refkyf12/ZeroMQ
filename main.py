@@ -30,7 +30,7 @@ def gen(id):
 def index():
   return render_template('/index.html')
 
-@app.route('/lane-detectiion')
+@app.route('/lane-detection')
 def lane():
   return render_template('/lane.html')
 
