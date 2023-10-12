@@ -46,7 +46,7 @@ def detect():
     # cap = VideoStream(config['cam']).start()
     cap = cv2.VideoCapture("rtsp://admin:rastek123@10.50.0.13/cam/realmonitor?channel=1&subtype=00")
     
-    with open("coco.names") as f:
+    with open("../models/coco.names") as f:
         classes = f.read().strip().split('\n')
 
     colors = np.random.uniform(0, 255, size=(len(classes), 3))
@@ -150,7 +150,7 @@ if __name__ == "__main__":
     manager = Manager()
     
     # LOAD MODEL AND CONFIG
-    net = cv2.dnn.readNet("yolov3-tiny.weights", "yolov3-tiny.cfg")
+    net = cv2.dnn.readNet("../models/yolov3-tiny.weights", "../models/yolov3-tiny.cfg")
 
     # net = cv2.dnn.readNetFromDarknet(config['model'], config['config'])
     
