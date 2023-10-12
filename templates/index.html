@@ -12,28 +12,29 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-xr5VpTwmGhCunz5VHKCPQ9K5UkNfgb1jgjqk94BY/KxI1bVKQoF+pLn6+bFjsBf9w3caFg9cB/gfrxhm8LZtkYw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <!--Style-->
-  <link rel="stylesheet" href="static/css/default.css" />
-  <link rel="stylesheet" href="static/css/font-awesome.min.css">
+  <!-- <link rel="stylesheet" href="./css/default.css" /> -->
+   <link rel="stylesheet" href=""{{ url_for('static',filename='styles/default.css') }}" />
+  <link rel="stylesheet" href="./css/font-awesome.min.css">
 
   <!--jquery-->
-  <link rel="stylesheet" href="static/css/jquery-ui.min.css">
-  <script src="static/js/jquery-3.6.0.min.js"></script>
-  <script src="static/js/jquery-ui.min.js"></script>
+  <link rel="stylesheet" href="./css/jquery-ui.min.css">
+  <script src="./js/jquery-3.6.0.min.js"></script>
+  <script src="./js/jquery-ui.min.js"></script>
 
   <!--Day JS-->
-  <script src="static/js/customParseFormat.js"></script>
-  <script src="static/js/dayjs.min.js"></script>
+  <script src="./js/customParseFormat.js"></script>
+  <script src="./js/dayjs.min.js"></script>
 
   <!--timeline-->
-  <link rel="stylesheet" href="static/js/vis-timeline-graph2d.min.css" />
-  <script src="static/js/vis-timeline-graph2d.min.js"></script>
+  <link rel="stylesheet" href="./js/vis-timeline-graph2d.min.css" />
+  <script src="./js/vis-timeline-graph2d.min.js"></script>
 
   <!--scripts-->
-  <script src="static/js/scripts.js"></script>
-  <script src="static/js/canvas2image.js"></script>
+  <script src="./js/scripts.js"></script>
+  <script src="./js/canvas2image.js"></script>
 
   <!--socket io-->
-  <script src="static/js/socket.io.min.js"></script>
+  <script src="./js/socket.io.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
 </head>
 
@@ -71,7 +72,7 @@
       </div>
 
       <div class="floor-card" id="floor2">
-        <div class="card-header" onclick="toggleFloor('floor2')">Floor 2</div>
+        <div class="card-header" onclick="toggleFloor('floor2')">hhhihiuhu</div>
         <div class="card-content" style="max-height: 0px;">
           <ul style="padding-right: 2rem;">
             <div class="cameraPanel">
@@ -83,9 +84,6 @@
                     <img class="snapShot" src="stream/2" />
                   </td>
                   <td>
-                    <!-- <button onclick="StartTimeline('{{@key}}','{{this.name}}')" class="videoButton"><i
-                        class="fa fa-history"></i>
-                    </button> -->
                   </td>
                 </tr>
               </table>
@@ -160,14 +158,14 @@
     </div>
   </div>
 
-  <template id="liveView">
+  <!-- <template id="liveView">
     <video class="videoLive"></video>
   </template>
 
   <template id="scrub">
     <video class="videoScrub" type="video/mp4" src="" preload="true" muted></video>
     <div id="timeline"></div>
-  </template>
+  </template> -->
 
   <script>
     const liveName0Element = document.getElementById("liveName0");

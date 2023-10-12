@@ -25,7 +25,7 @@ def gen(id):
 
 @app.route('/')
 def index():
-  return render_template('/dashboard/index.html')
+  return render_template('/index.html')
 
 @app.route('/stream/<id>')
 def camera(id):
