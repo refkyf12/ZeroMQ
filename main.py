@@ -3,13 +3,13 @@ from stream import streamer
 
 app = Flask(__name__)
 CAMERAS = [
-   (1, "tcp://localhost:5555"),
+   (1, "tcp://10.200.0.161:5555"),
    (2, "tcp://localhost:6666"),
    (3, "tcp://localhost:7777"),
    (4, "tcp://localhost:8888"),
-   (5, "tcp://localhost:9999"),
-   (6, "tcp://localhost:9991"),
-   (7, "tcp://localhost:9992"),
+   (5, "tcp://10.200.0.219:9999"),
+   (6, "tcp://10.200.0.219:9991"),
+   (7, "tcp://10.200.0.219:9992"),
    (8, "tcp://localhost:9993"),
    (9, "tcp://localhost:9994"),
    (10, "tcp://localhost:9995"),
@@ -25,7 +25,7 @@ def gen(id):
 
 @app.route('/')
 def index():
-  return render_template('index.html')
+  return render_template('/dashboard/index.html')
 
 @app.route('/stream/<id>')
 def camera(id):

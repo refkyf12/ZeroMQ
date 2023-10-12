@@ -1,9 +1,0 @@
-[Unit]
-Description=Menjalankan Camera
-
-[Service]
-ExecStart=/bin/bash -c "cd /home/refky/websocket/live-stream-zeromq && /home/refky/websocket/env/bin/python client.py"
-Restart=always
-
-[Install]
-WantedBy=multi-user.target

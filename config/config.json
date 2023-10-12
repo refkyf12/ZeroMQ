@@ -1,0 +1,65 @@
+{
+    "camera": [
+      {
+        "id": 1,
+        "host": "tcp://localhost",
+        "port": 5555
+      },
+      {
+        "id": 2,
+        "host": "tcp://localhost",
+        "port": 6666
+      },
+      {
+        "id": 3,
+        "host": "tcp://localhost",
+        "port": 7777
+      },
+      {
+        "id": 4,
+        "host": "tcp://localhost",
+        "port": 8888
+      },
+      {
+        "id": 5,
+        "host": "tcp://localhost",
+        "port": 9999
+      },
+      {
+        "id": 6,
+        "host": "tcp://localhost",
+        "port": 9991
+      },
+      {
+        "id": 7,
+        "host": "tcp://localhost",
+        "port": 9992
+      },
+      {
+        "id": 8,
+        "host": "tcp://localhost",
+        "port": 9993
+      },
+      {
+        "id": 9,
+        "host": "tcp://localhost",
+        "port": 9994
+      },
+      {
+        "id": 10,
+        "host": "tcp://localhost",
+        "port": 9995
+      },
+      {
+        "id": 11,
+        "host": "tcp://localhost",
+        "port": 9996
+      },
+      {
+        "id": 12,
+        "host": "tcp://localhost",
+        "port": 9997
+      }
+    ]
+  }
+  
