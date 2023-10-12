@@ -194,8 +194,8 @@ table.cameraPanelOption td {
 }
 
 .cameraPanel .snapShot {
-	width: 1200px;
-	height: 1111200px;
+	width: 200px;
+	height: 200px;
 	border-radius: 4px;
 }
 .cameraPanel .cameraPanelOption {

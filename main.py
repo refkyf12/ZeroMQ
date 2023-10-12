@@ -1,7 +1,10 @@
 from flask import Flask, render_template, Response
 from stream import streamer
 
-app = Flask(__name__)
+
+app = Flask(__name__, static_folder='../static/')
+app.static_folder = 'static'
+
 CAMERAS = [
    (1, "tcp://10.200.0.161:5555"),
    (2, "tcp://localhost:6666"),

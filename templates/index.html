@@ -13,29 +13,29 @@
 
   <!--Style-->
   <!-- <link rel="stylesheet" href="./css/default.css" /> -->
-   <link rel="stylesheet" href=""{{ url_for('static',filename='styles/default.css') }}" />
-  <link rel="stylesheet" href="./css/font-awesome.min.css">
+  <link rel="stylesheet" href="../static/styles/style.css">
+  <!-- <link rel="stylesheet" href="./css/font-awesome.min.css"> -->
 
   <!--jquery-->
-  <link rel="stylesheet" href="./css/jquery-ui.min.css">
+  <!-- <link rel="stylesheet" href="./css/jquery-ui.min.css">
   <script src="./js/jquery-3.6.0.min.js"></script>
-  <script src="./js/jquery-ui.min.js"></script>
+  <script src="./js/jquery-ui.min.js"></script> -->
 
   <!--Day JS-->
-  <script src="./js/customParseFormat.js"></script>
-  <script src="./js/dayjs.min.js"></script>
+  <!-- <script src="./js/customParseFormat.js"></script>
+  <script src="./js/dayjs.min.js"></script> -->
 
   <!--timeline-->
-  <link rel="stylesheet" href="./js/vis-timeline-graph2d.min.css" />
-  <script src="./js/vis-timeline-graph2d.min.js"></script>
+  <!-- <link rel="stylesheet" href="./js/vis-timeline-graph2d.min.css" />
+  <script src="./js/vis-timeline-graph2d.min.js"></script> -->
 
   <!--scripts-->
-  <script src="./js/scripts.js"></script>
-  <script src="./js/canvas2image.js"></script>
+  <!-- <script src="./js/scripts.js"></script>
+  <script src="./js/canvas2image.js"></script> -->
 
   <!--socket io-->
-  <script src="./js/socket.io.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+  <!-- <script src="./js/socket.io.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script> -->
 </head>
 
 <body style="background-color: #1D2835;">
@@ -72,7 +72,7 @@
       </div>
 
       <div class="floor-card" id="floor2">
-        <div class="card-header" onclick="toggleFloor('floor2')">hhhihiuhu</div>
+        <div class="card-header" onclick="toggleFloor('floor2')">Floor 2</div>
         <div class="card-content" style="max-height: 0px;">
           <ul style="padding-right: 2rem;">
             <div class="cameraPanel">
@@ -158,14 +158,14 @@
     </div>
   </div>
 
-  <!-- <template id="liveView">
+  <template id="liveView">
     <video class="videoLive"></video>
   </template>
 
   <template id="scrub">
     <video class="videoScrub" type="video/mp4" src="" preload="true" muted></video>
     <div id="timeline"></div>
-  </template> -->
+  </template>
 
   <script>
     const liveName0Element = document.getElementById("liveName0");
