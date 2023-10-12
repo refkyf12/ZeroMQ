@@ -1,6 +1,6 @@
 @font-face {
 	font-family: 'Roboto';
-	src: url('fonts/Roboto-Light.ttf');
+	src: url('../fonts/Roboto-Light.ttf');
 }
 
 html,
@@ -194,8 +194,8 @@ table.cameraPanelOption td {
 }
 
 .cameraPanel .snapShot {
-	width: 200px;
-	height: 200px;
+	width: 230px;
+	height: 230px;
 	border-radius: 4px;
 }
 .cameraPanel .cameraPanelOption {
