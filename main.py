@@ -30,6 +30,14 @@ def gen(id):
 def index():
   return render_template('/index.html')
 
+@app.route('/lane-detectiion')
+def lane():
+  return render_template('/lane.html')
+
+@app.route('/jump-detection')
+def jump():
+  return render_template('/jump.html')
+
 @app.route('/stream/<id>')
 def camera(id):
   return Response(gen(id), mimetype='multipart/x-mixed-replace; boundary=frame')
