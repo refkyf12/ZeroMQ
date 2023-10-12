@@ -74,7 +74,26 @@
                   </td>
                   <td>
                     <button class="videoButton" onclick="handleVideoButtonClick(1)">
-                      <i class="fa fa-play"></i>
+                      <i class="fa fa-arrow-right"></i>
+                    </button>
+                    <button class="videoButton" onclick="clearVideo(1)">
+                      <i class="fa fa-arrow-left"></i>
+                    </button>
+                  </td>
+                </tr>
+              </table>
+              <div class="title">Analytic 1</div>
+              <table class="cameraPanelOption">
+                <tr>
+                  <td>
+                    <img class="snapShot" src="/stream/1" />
+                  </td>
+                  <td>
+                    <button class="videoButton" onclick="handleVideoButtonClick(3)">
+                      <i class="fa fa-arrow-right"></i>
+                    </button>
+                    <button class="videoButton" onclick="clearVideo(3)">
+                      <i class="fa fa-arrow-left"></i>
                     </button>
                   </td>
                 </tr>
@@ -98,7 +117,10 @@
                   </td>
                   <td>
                     <button class="videoButton" onclick="handleVideoButtonClick(2)">
-                      <i class="fa fa-play"></i>
+                      <i class="fa fa-arrow-right"></i>
+                    </button>
+                    <button class="videoButton" onclick="clearVideo(2)">
+                      <i class="fa fa-arrow-left"></i>
                     </button>
                   </td>
                 </tr>
@@ -202,18 +224,23 @@
     let currentTdIndex = 1; // Variabel untuk melacak indeks sel <td> saat ini
 
     function handleVideoButtonClick(videoNumber) {
-      // Dapatkan elemen snapshot
-      const snapshotImg = document.createElement('img');
-      snapshotImg.setAttribute('src', `stream/${videoNumber}`);
-
-      // Dapatkan elemen td yang ingin Anda masukkan elemen baru ke dalamnya
       const targetTd = document.getElementById(`videoCell${videoNumber}`);
 
-      // Bersihkan kontennya terlebih dahulu jika diperlukan
-      targetTd.innerHTML = '';
+      const snapshotImg = new Image();
+      snapshotImg.onload = function () {
+        // Atur dimensi gambar secara khusus
+        this.width = 370;
+        this.height = 300;
 
-      // Masukkan elemen baru (snapshot) ke dalam <td>
-      targetTd.appendChild(snapshotImg);
+        // Bersihkan kontennya terlebih dahulu jika diperlukan
+        targetTd.innerHTML = '';
+
+        // Masukkan elemen baru (snapshot) ke dalam <td>
+        targetTd.appendChild(this);
+      };
+
+      // Atur atribut src setelah menetapkan onload handler
+      snapshotImg.src = `stream/${videoNumber}`;
 
       // Perbarui indeks untuk selanjutnya
       currentTdIndex++;
@@ -222,6 +249,11 @@
       if (currentTdIndex > 12) {
         currentTdIndex = 1;
       }
+    }
+
+    function clearVideo(videoNumber) {
+      const targetTd = document.getElementById(`videoCell${videoNumber}`);
+      targetTd.innerHTML = '';
     }
   </script>
 
