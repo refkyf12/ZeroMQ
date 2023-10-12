@@ -73,7 +73,7 @@
                     <img class="snapShot" src="/stream/1" />
                   </td>
                   <td>
-                    <button class="videoButton" onclick="handleVideoButtonClick('cameraPanel1')">
+                    <button class="videoButton" onclick="handleVideoButtonClick(1)">
                       <i class="fa fa-play"></i>
                     </button>
                   </td>
@@ -97,7 +97,7 @@
                     <img class="snapShot" src="stream/2" />
                   </td>
                   <td>
-                    <button class="videoButton" onclick="handleVideoButtonClick('cameraPanel2')">
+                    <button class="videoButton" onclick="handleVideoButtonClick(2)">
                       <i class="fa fa-play"></i>
                     </button>
                   </td>
@@ -199,38 +199,32 @@
 
 
   <script>
-    function handleVideoButtonClick(cameraPanelId) {
-      var snapShot = document.querySelector('#' + cameraPanelId + ' .snapShot');
-      var videoCell = document.querySelector('#' + cameraPanelId + ' .videoCell');
+    let currentTdIndex = 1; // Variabel untuk melacak indeks sel <td> saat ini
 
-      if (!snapShot || !videoCell) {
-        console.error('Kamera atau div tidak ditemukan');
-        console.log('snapShot:', snapShot);
-        console.log('videoCell:', videoCell);
-        return;
-      }
+    function handleVideoButtonClick(videoNumber) {
+      // Dapatkan elemen snapshot
+      const snapshotImg = document.createElement('img');
+      snapshotImg.setAttribute('src', `stream/${videoNumber}`);
 
-      var cameraId = snapShot.getAttribute('src');
+      // Dapatkan elemen td yang ingin Anda masukkan elemen baru ke dalamnya
+      const targetTd = document.getElementById(`videoCell${videoNumber}`);
 
-      if (videoCell.dataset.cameraId !== "") {
-        console.error('Kamera sudah dimasukkan pada div');
-        return;
-      }
+      // Bersihkan kontennya terlebih dahulu jika diperlukan
+      targetTd.innerHTML = '';
 
-      var newImage = document.createElement('img');
-      newImage.classList.add('snapShot');
-      newImage.src = cameraId;
+      // Masukkan elemen baru (snapshot) ke dalam <td>
+      targetTd.appendChild(snapshotImg);
 
-      videoCell.dataset.cameraId = cameraId;
-      videoCell.innerHTML = '';
-      videoCell.appendChild(newImage);
+      // Perbarui indeks untuk selanjutnya
+      currentTdIndex++;
 
-      var liveName = document.getElementById('liveName1');
-      if (liveName) {
-        liveName.textContent = "Nama Live Anda";
+      // Jika sudah mencapai td terakhir, kembali ke td pertama
+      if (currentTdIndex > 12) {
+        currentTdIndex = 1;
       }
     }
   </script>
+
   <script>
     const liveName0Element = document.getElementById("liveName0");
     liveName0Element.textContent = liveNameCells[0];
