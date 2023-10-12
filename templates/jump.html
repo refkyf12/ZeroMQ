@@ -71,7 +71,7 @@
         </div>
       </div>
 
-      <div class="floor-card" id="floor2">
+      <div class="floor-card" id="floor2" onclick="addFloor2()">
         <div class="card-header" onclick="toggleFloor('floor2')">Floor 2</div>
         <div class="card-content" style="max-height: 0px;">
           <ul style="padding-right: 2rem;">
@@ -173,6 +173,49 @@
     <div id="timeline"></div>
   </template>
 
+  <script>
+    function addFloor2() {
+      // Buat elemen <td> baru untuk Live 2
+      const newTd = document.createElement('td');
+      newTd.setAttribute('style', 'background-color: transparent; border: none;');
+      
+      // Buat elemen judul untuk Live 2
+      const titleDiv = document.createElement('div');
+      titleDiv.style.color = 'white';
+      titleDiv.style.fontWeight = '600';
+      titleDiv.style.marginBottom = '5px';
+      titleDiv.textContent = 'Live : ';
+      
+      // Buat elemen span untuk menampilkan nama Live 2
+      const liveNameSpan = document.createElement('span');
+      liveNameSpan.setAttribute('id', 'liveName2');
+      
+      // Buat elemen video untuk Live 2
+      const videoDiv = document.createElement('div');
+      videoDiv.setAttribute('id', 'videoCell2');
+      videoDiv.style.height = '300px';
+      videoDiv.style.width = '370px';
+      videoDiv.style.backgroundColor = 'transparent';
+      videoDiv.style.border = '1px solid white';
+      
+      const videoImg = document.createElement('img');
+      videoImg.setAttribute('class', 'w-100 h-100');
+      videoImg.setAttribute('src', '/stream/2');
+      
+      // Gabungkan semua elemen ke dalam <td> baru
+      titleDiv.appendChild(liveNameSpan);
+      newTd.appendChild(titleDiv);
+      videoDiv.appendChild(videoImg);
+      newTd.appendChild(videoDiv);
+      
+      // Dapatkan elemen dengan ID 'floor1' yang di-klik
+      const floor1Element = document.getElementById('floor1');
+      
+      // Masukkan elemen <td> baru setelah elemen 'floor1' yang di-klik
+      floor1Element.insertAdjacentElement('afterend', newTd);
+    }
+    </script>
+  
   <script>
     const liveName0Element = document.getElementById("liveName0");
     liveName0Element.textContent = liveNameCells[0];
