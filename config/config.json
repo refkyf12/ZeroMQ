@@ -1,65 +1,20 @@
 {
-    "camera": [
-      {
-        "id": 1,
-        "host": "tcp://localhost",
-        "port": 5555
+  "cameras": {
+      "camera_1": {
+          "rtsp_url": "rtsp://admin:rastek123@10.50.0.13/cam/realmonitor?channel=1&subtype=00",
+          "zmq_address": "tcp://*:6666"
       },
-      {
-        "id": 2,
-        "host": "tcp://localhost",
-        "port": 6666
+      "camera_2": {
+          "rtsp_url": "rtsp://admin:rastek123@10.50.0.13/cam/realmonitor?channel=1&subtype=00",
+          "zmq_address": "tcp://*:7777"
       },
-      {
-        "id": 3,
-        "host": "tcp://localhost",
-        "port": 7777
+      "camera_3": {
+          "rtsp_url": "rtsp://admin:rastek123@10.50.0.13/cam/realmonitor?channel=1&subtype=00",
+          "zmq_address": "tcp://*:8888"
       },
-      {
-        "id": 4,
-        "host": "tcp://localhost",
-        "port": 8888
-      },
-      {
-        "id": 5,
-        "host": "tcp://localhost",
-        "port": 9999
-      },
-      {
-        "id": 6,
-        "host": "tcp://localhost",
-        "port": 9991
-      },
-      {
-        "id": 7,
-        "host": "tcp://localhost",
-        "port": 9992
-      },
-      {
-        "id": 8,
-        "host": "tcp://localhost",
-        "port": 9993
-      },
-      {
-        "id": 9,
-        "host": "tcp://localhost",
-        "port": 9994
-      },
-      {
-        "id": 10,
-        "host": "tcp://localhost",
-        "port": 9995
-      },
-      {
-        "id": 11,
-        "host": "tcp://localhost",
-        "port": 9996
-      },
-      {
-        "id": 12,
-        "host": "tcp://localhost",
-        "port": 9997
+      "camera_4": {
+          "rtsp_url": "rtsp://admin:rastek123@10.50.0.13/cam/realmonitor?channel=1&subtype=00",
+          "zmq_address": "tcp://*:6668"
       }
-    ]
   }
-  
+}
