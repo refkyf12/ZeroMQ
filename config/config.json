@@ -107,5 +107,5 @@
             "client12.py"
         ]
     },
-    "python_env": "env/bin/python"
+    "python_env": "myenv/bin/python"
 }
