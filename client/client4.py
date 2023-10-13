@@ -17,7 +17,7 @@ from multiprocessing import Manager
 
 from utils.helper import getOutputsNames, draw_pred
 
-with open('../config/config.json', 'r') as config_file:
+with open('config/config.json', 'r') as config_file:
     config = json.load(config_file)
 
 kamera_id = "camera_4"
@@ -49,7 +49,7 @@ def classify_frame(net, inputQueue, outputQueue):
 def detect():
     global detections
 
-    # with open('../config/config.json', 'r') as config_file:
+    # with open('config/config.json', 'r') as config_file:
     #     config = json.load(config_file)
 
     # kamera_id = "camera_1"
@@ -63,7 +63,7 @@ def detect():
     # cap = VideoStream(config['cam']).start()
     cap = cv2.VideoCapture(rtsp_url)
 
-    with open("../models/coco.names", "r") as f:
+    with open(config["model"]["class"], "r") as f:
         classes = f.read().strip().split('\n')\
 
     colors = np.random.uniform(0, 255, size=(len(classes), 3))
@@ -170,7 +170,7 @@ if __name__ == "__main__":
     manager = Manager()
     
     # LOAD MODEL AND CONFIG
-    net = cv2.dnn.readNet("../models/yolov3-tiny.weights", "../models/yolov3-tiny.cfg")
+    net = cv2.dnn.readNet(config["model"]["weight"], config["model"]["config"])
 
     # net = cv2.dnn.readNetFromDarknet(config['model'], config['config'])
     
