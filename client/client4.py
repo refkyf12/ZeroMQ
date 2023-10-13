@@ -7,6 +7,7 @@ import threading
 import cv2
 import time
 import json
+import os
 
 from imutils.video import VideoStream, FileVideoStream
 from multiprocessing import Process
@@ -16,6 +17,12 @@ from multiprocessing import Manager
 
 from utils.helper import getOutputsNames, draw_pred
 
+with open('../config/config.json', 'r') as config_file:
+    config = json.load(config_file)
+
+kamera_id = "camera_4"
+rtsp_url = config["cameras"][kamera_id]["rtsp_url"]
+zmq_address = config["cameras"][kamera_id]["zmq_address"]
 delay = 0
 
 def classify_frame(net, inputQueue, outputQueue):
@@ -41,17 +48,27 @@ def classify_frame(net, inputQueue, outputQueue):
 
 def detect():
     global detections
+
+    # with open('../config/config.json', 'r') as config_file:
+    #     config = json.load(config_file)
+
+    # kamera_id = "camera_1"
+    # rtsp_url = config["cameras"][kamera_id]["rtsp_url"]
+
+    print("ID Kamera:", kamera_id)
+    print("RTSP URL:", rtsp_url)
+    # print("ZMQ Address:", zmq_address)
     
     # cap = FileVideoStream(config['cam']).start() # Load Video
     # cap = VideoStream(config['cam']).start()
-    cap = cv2.VideoCapture("rtsp://admin:rastek123@10.50.0.15/cam/realmonitor?channel=1&subtype=00")
-    
-    with open("coco.names") as f:
-        classes = f.read().strip().split('\n')
+    cap = cv2.VideoCapture(rtsp_url)
+
+    with open("../models/coco.names", "r") as f:
+        classes = f.read().strip().split('\n')\
 
     colors = np.random.uniform(0, 255, size=(len(classes), 3))
     
-    while True: 
+    while True:
         # time.sleep(delay)
         
         hasFrame, image = cap.read() # opencv
@@ -112,10 +129,13 @@ def detect():
             frameQueue.put(image)
 
 def output():
+    print("ID Kamera:", kamera_id)
+    print("zmq_address URL:", zmq_address)
+
     prevTime = 0
     context = zmq.Context()
     footage_socket = context.socket(zmq.PUB)
-    footage_socket.bind('tcp://*:8888')
+    footage_socket.bind(zmq_address)
     
     while True:
         # time.sleep(delay)
@@ -150,7 +170,7 @@ if __name__ == "__main__":
     manager = Manager()
     
     # LOAD MODEL AND CONFIG
-    net = cv2.dnn.readNet("yolov3-tiny.weights", "yolov3-tiny.cfg")
+    net = cv2.dnn.readNet("../models/yolov3-tiny.weights", "../models/yolov3-tiny.cfg")
 
     # net = cv2.dnn.readNetFromDarknet(config['model'], config['config'])
     

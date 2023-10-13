@@ -20,7 +20,7 @@ from utils.helper import getOutputsNames, draw_pred
 with open('../config/config.json', 'r') as config_file:
     config = json.load(config_file)
 
-kamera_id = "camera_1"
+kamera_id = "camera_2"
 rtsp_url = config["cameras"][kamera_id]["rtsp_url"]
 zmq_address = config["cameras"][kamera_id]["zmq_address"]
 delay = 0
