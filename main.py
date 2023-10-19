@@ -1,5 +1,5 @@
 import json
-from flask import Flask, render_template, Response
+from flask import Flask, render_template, Response, redirect, request
 from stream import streamer
 from subprocess import Popen
 
@@ -34,6 +34,50 @@ def gen(id):
 def index():
   return render_template('/index.html')
 
+@app.route('/manage')
+def manage():
+  return render_template('/manage.html', cameras=config["cameras"])
+
+@app.route('/manage/create', methods=["POST"])
+def manageCreate():
+  newId = len(config["cameras"].keys())+1
+  newKey = "camera_" + str(newId)
+  config["cameras"][newKey] = {
+    'id': newId,
+    'rtsp_url': request.form.get('rtsp'),
+    'zmq_address': request.form.get('zmq'),
+    'address': request.form.get('address')
+  }
+
+  with open('config/config.json', 'w') as f:
+    json.dump(config, f)
+
+  return redirect("/manage")
+
+@app.route('/manage/edit', methods=["POST"])
+def manageEdit():
+  key = request.form.get('key')
+  config["cameras"][key] = {
+    'id': config["cameras"][key]['id'],
+    'rtsp_url': request.form.get('rtsp'),
+    'zmq_address': request.form.get('zmq'),
+    'address': request.form.get('address')
+  }
+
+  with open('config/config.json', 'w') as f:
+    json.dump(config, f)
+
+  return redirect("/manage")
+
+@app.route('/manage/delete/<key>', methods=["DELETE"])
+def manageDelete(key):
+  del config['cameras'][key]
+
+  with open('config/config.json', 'w') as f:
+    json.dump(config, f)
+
+  return redirect("/manage")
+
 @app.route('/lean-detection')
 def lean():
   return render_template('/lean.html')
@@ -48,6 +92,6 @@ def camera(id):
 
 if __name__ == '__main__':
   # runProcess = [Popen([config["python_env"],f"{config["client"]["client_folder"]}{client}"]) for client in config["client"]["clients"]]
-  runProcess = [Popen([config["python_env"], f"client/{client}"]) for client in config["client"]["clients"]]
+  # runProcess = [Popen([config["python_env"], f"client/{client}"]) for client in config["client"]["clients"]]
 
   app.run(debug=True, host="0.0.0.0")
