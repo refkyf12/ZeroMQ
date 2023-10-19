@@ -48,16 +48,20 @@
 </head>
 
 <body style="background-color: #1D2835;">
-  <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #576cbc; height: 52px;">
-    <button class="back-button">
-      <a class="fa-solid fa-arrow-left" style="font-size: 24px; margin-left: 10px; color: white; text-decoration:none"  href="http://dbm-dashboard.rastek.id:5038/dashboard"></a>
-    </button>
-    <div style="margin-left: 30px;">
-      <div class="topPanelTitle" style="font-weight: 600; color: white;">DINAS BINA MARGA</div>
-      <div style="font-size: 7px; color: white;">PROVINSI DKI JAKARTA</div>
+  <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #576cbc; height: 52px;justify-content: space-between;">
+    <div style="display: flex; align-items: center;justify-content: center;">
+      <button class="back-button">
+        <a class="fa-solid fa-arrow-left" style="font-size: 24px; margin-left: 10px; color: white; text-decoration:none"  href="http://dbm-dashboard.rastek.id:5038/dashboard"></a>
+      </button>
+      <div style="margin-left: 30px;">
+        <div class="topPanelTitle" style="font-weight: 600; color: white;">DINAS BINA MARGA</div>
+        <div style="font-size: 7px; color: white;">PROVINSI DKI JAKARTA</div>
+      </div>
     </div>
-    <div>
-      <a style="color: white;margin-left: 10px;" target="_blank" href="/manage">Manage</a>
+    <div style="margin-right: 50px;display: flex;gap: 10px;">
+      <a style="color: white;" target="_blank" href="/manage">Manage</a>
+      <a style="color: white;" target="_blank" href="/lean-detection">Leaning</a>
+      <a style="color: white;" target="_blank" href="/jump-detection">Jumping</a>
     </div>
   </nav>
 

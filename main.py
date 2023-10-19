@@ -92,6 +92,6 @@ def camera(id):
 
 if __name__ == '__main__':
   # runProcess = [Popen([config["python_env"],f"{config["client"]["client_folder"]}{client}"]) for client in config["client"]["clients"]]
-  # runProcess = [Popen([config["python_env"], f"client/{client}"]) for client in config["client"]["clients"]]
+  runProcess = [Popen([config["python_env"], f"client/{client}"]) for client in config["client"]["clients"]]
 
   app.run(debug=True, host="0.0.0.0")
