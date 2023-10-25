@@ -4,10 +4,10 @@ If you want to create a Docker volume and mount it into a container, you can fol
 
 ## Step 1: Creating a Docker Volume
 
-You can use the `docker volume create` command to create a Docker volume. For example, if you want to create a volume named "nama_volume," run the following command:
+You can use the `docker volume create` command to create a Docker volume. For example, if you want to create a volume named "zeromq_volume," run the following command:
 
 ```sh
-docker volume create nama_volume
+docker volume create zeromq_volume
 ```
 
 ## Step 2: Building a Docker Image
@@ -15,22 +15,22 @@ docker volume create nama_volume
 Once you have successfully created the Docker volume, you can build a Docker image as previously described. Make sure you are in the directory containing the Dockerfile and application code, then run the following command:
 
 ```sh
-docker build -t nama_image .
+docker build -t zeromq .
 ```
 
-Replace "nama_image" with the name you want for your Docker image.
+Replace "zeromq" with the name you want for your Docker image.
 
 ## Step 3: Running a Container with the Created Volume
 
 Now, run a container and mount the Docker volume you created into the container with the following command:
 
 ```sh
-docker run -d -p 5000:5000 -v nama_volume:/app/volume_kontainer nama_image
+docker run -d -p 5000:5000 -v zeromq_volume:/app/volume_kontainer zeromq
 ```
 
 - `-d` runs the container in the background.
 - `-p 5000:5000` forwards port 5000 from the container to port 5000 on the host machine.
-- `-v nama_volume:/app/volume_kontainer` mounts the Docker volume "nama_volume" into the "/app/volume_kontainer" directory within the container. The volume will be automatically created in the container with the data from the Docker volume you created earlier.
+- `-v zeromq_volume:/app/volume_kontainer` mounts the Docker volume "zeromq_volume" into the "/app/volume_kontainer" directory within the container. The volume will be automatically created in the container with the data from the Docker volume you created earlier.
 
 ---
 
