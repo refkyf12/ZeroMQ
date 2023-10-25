@@ -22,6 +22,7 @@
           <th scope="col">RTSP URL</th>
           <th scope="col">ZMQ Address</th>
           <th scope="col">Address</th>
+          <th scope="col">Client</th>
           <th scope="col">Status Kamera</th>
           <th scope="col">Lokasi Kamera</th>
           <th scope="col">Action</th>
@@ -34,6 +35,7 @@
           <td scope="row">{{cameras[key]['rtsp_url']}}</td>
           <td scope="row">{{cameras[key]['zmq_address']}}</td>
           <td scope="row">{{cameras[key]['address']}}</td>
+          <td scope="row">{{cameras[key]['client']}}</td>
           {% if cameras[key]['status'] == 1 %}
           <td scope="row">Aktif</td>
           {% endif %}
@@ -45,7 +47,7 @@
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editKamera"
               id="{{key}}" data-rtsp="{{cameras[key]['rtsp_url']}}" data-zmq="{{cameras[key]['zmq_address']}}"
               data-address="{{cameras[key]['address']}}" data-status="{{cameras[key]['status']}}"
-              data-lokasi="{{cameras[key]['lokasi_kamera']}}" onclick="editKameraField('{{key}}')">Edit</button>
+              data-lokasi="{{cameras[key]['lokasi_kamera']}}" data-client="{{cameras[key]['client']}}" onclick="editKameraField('{{key}}')">Edit</button>
             <button type="button" class="btn btn-danger" onclick="deleteKamera('{{key}}')">Hapus</button>
           </td>
         </tr>
@@ -95,6 +97,10 @@
               <label for="exampleInputLokasi1" class="form-label">Lokasi Kamera</label>
               <input type="text" name="lokasi_kamera" class="form-control" id="exampleInputLokasi1"
                 aria-describedby="LokasiHelp">
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputClient1" class="form-label">Client</label>
+              <input type="text" name="client_kamera" class="form-control" id="exampleClient1">
             </div>
             <button type="submit" class="btn btn-primary float-right">Tambah</button>
           </form>
@@ -149,6 +155,10 @@
               <input type="text" name="lokasi_kamera" class="form-control" id="editInputLokasi"
                 aria-describedby="LokasiHelp">
             </div>
+            <div class="mb-3">
+              <label for="editInputClient" class="form-label">Client</label>
+              <input type="text" name="client_kamera" class="form-control" id="editInputClient">
+            </div>
             <button type="submit" class="btn btn-primary float-right">Ubah</button>
           </form>
         </div>
@@ -167,6 +177,7 @@
       document.getElementById("editInputAddress").value = button.getAttribute("data-address")
       document.getElementById("editInputStatus").value = button.getAttribute("data-status")
       document.getElementById("editInputLokasi").value = button.getAttribute("data-lokasi")
+      document.getElementById("editInputClient").value = button.getAttribute("data-client")
     }
 
     function deleteKamera(key) {

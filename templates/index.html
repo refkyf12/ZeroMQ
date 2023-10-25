@@ -67,225 +67,49 @@
 
   <div class="row" style="height: calc(100vh - 50px); overflow: auto;">
     <div class="col-md-2" style="background-color: #19376D;" id="sidebar">
-      <div class="floor-card" id="floor1">
-        <div class="card-header" onclick="toggleFloor('floor1')">Floor 1</div>
-        <div class="card-content" style="max-height: 0px;">
-          <ul style="padding-right: 2rem;">
-            <li class="cameraPanel">
-              <div style="height: 10px;"></div>
-              <div class="title">Analytic 1</div>
-              <table class="cameraPanelOption">
-                <tr>
-                  <td>
-                    <img class="snapShot" src="/stream/1" />
-                  </td>
-                  <td>
-                    <button class="videoButton" onclick="handleVideoButtonClick(1)">
-                      <i class="fa fa-arrow-right"></i>
-                    </button>
-                    <button class="videoButton" onclick="clearVideo(1)">
-                      <i class="fa fa-arrow-left"></i>
-                    </button>
-                  </td>
-                </tr>
-              </table>
-              <div class="title">Analytic 1</div>
-              <table class="cameraPanelOption">
-                <tr>
-                  <td>
-                    <img class="snapShot" src="/stream/2" />
-                  </td>
-                  <td>
-                    <button class="videoButton" onclick="handleVideoButtonClick(2)">
-                      <i class="fa fa-arrow-right"></i>
-                    </button>
-                    <button class="videoButton" onclick="clearVideo(2)">
-                      <i class="fa fa-arrow-left"></i>
-                    </button>
-                  </td>
-                </tr>
-              </table>
-              <div class="title">Analytic 1</div>
-              <table class="cameraPanelOption">
-                <tr>
-                  <td>
-                    <img class="snapShot" src="/stream/5" />
-                  </td>
-                  <td>
-                    <button class="videoButton" onclick="handleVideoButtonClick(5)">
-                      <i class="fa fa-arrow-right"></i>
-                    </button>
-                    <button class="videoButton" onclick="clearVideo(5)">
-                      <i class="fa fa-arrow-left"></i>
-                    </button>
-                  </td>
-                </tr>
-              </table>
-              <div class="title">Analytic 1</div>
-              <table class="cameraPanelOption">
-                <tr>
-                  <td>
-                    <img class="snapShot" src="/stream/6" />
-                  </td>
-                  <td>
-                    <button class="videoButton" onclick="handleVideoButtonClick(6)">
-                      <i class="fa fa-arrow-right"></i>
-                    </button>
-                    <button class="videoButton" onclick="clearVideo(6)">
-                      <i class="fa fa-arrow-left"></i>
-                    </button>
-                  </td>
-                </tr>
-              </table>
-              <div class="title">Analytic 1</div>
-              <table class="cameraPanelOption">
-                <tr>
-                  <td>
-                    <img class="snapShot" src="/stream/7" />
-                  </td>
-                  <td>
-                    <button class="videoButton" onclick="handleVideoButtonClick(7)">
-                      <i class="fa fa-arrow-right"></i>
-                    </button>
-                    <button class="videoButton" onclick="clearVideo(7)">
-                      <i class="fa fa-arrow-left"></i>
-                    </button>
-                  </td>
-                </tr>
-              </table>
-              <div class="title">Analytic 1</div>
-              <table class="cameraPanelOption">
-                <tr>
-                  <td>
-                    <img class="snapShot" src="/stream/8" />
-                  </td>
-                  <td>
-                    <button class="videoButton" onclick="handleVideoButtonClick(8)">
-                      <i class="fa fa-arrow-right"></i>
-                    </button>
-                    <button class="videoButton" onclick="clearVideo(8)">
-                      <i class="fa fa-arrow-left"></i>
-                    </button>
-                  </td>
-                </tr>
-              </table>
-            </li>
-          </ul>
+      {% for key in cameras.keys() %}
+        <div class="floor-card" id="{{key}}">
+          <div class="card-header d-flex justify-content-between" onclick="toggleFloor('{{key}}')">
+            {{key}}
+            <button onclick="toggleShowAll('{{key}}')">
+              Show
+            </button>
+          </div>
+          <div class="card-content" style="max-height: 0px;">
+            <ul style="padding-right: 2rem;">
+              <li class="cameraPanel">
+                {% for camera in cameras[key] %}
+                  <div style="height: 10px;"></div>
+                  <div class="title">
+                    Camera {{camera}}
+                  </div>
+                  <table class="cameraPanelOption">
+                    <tr>
+                      <td>
+                        <img data-camera-id="{{camera}}" class="snapShot" src="/stream/{{camera}}" />
+                      </td>
+                      <!-- <td>
+                        <button class="videoButton" onclick="handleVideoButtonClick({{camera}})">
+                          <i class="fa fa-arrow-right"></i>
+                        </button>
+                        <button class="videoButton" onclick="clearVideo({{camera}})">
+                          <i class="fa fa-arrow-left"></i>
+                        </button>
+                      </td> -->
+                    </tr>
+                  </table>
+                {% endfor %}
+              </li>
+            </ul>
+          </div>
         </div>
-      </div>
-
-      <div class="floor-card" id="floor2">
-        <div class="card-header" onclick="toggleFloor('floor2')">Floor 2</div>
-        <div class="card-content" style="max-height: 0px;">
-          <ul style="padding-right: 2rem;">
-            <li class="cameraPanel">
-              <div style="height: 10px;"></div>
-              <div class="title">Analytic 2</div>
-              <table class="cameraPanelOption">
-                <tr>
-                  <td>
-                    <img class="snapShot" src="stream/3" />
-                  </td>
-                  <td>
-                    <button class="videoButton" onclick="handleVideoButtonClick(3)">
-                      <i class="fa fa-arrow-right"></i>
-                    </button>
-                    <button class="videoButton" onclick="clearVideo(3)">
-                      <i class="fa fa-arrow-left"></i>
-                    </button>
-                  </td>
-                </tr>
-              </table>
-              <div class="title">Analytic 3</div>
-              <table class="cameraPanelOption">
-                <tr>
-                  <td>
-                    <img class="snapShot" src="/stream/4" />
-                  </td>
-                  <td>
-                    <button class="videoButton" onclick="handleVideoButtonClick(4)">
-                      <i class="fa fa-arrow-right"></i>
-                    </button>
-                    <button class="videoButton" onclick="clearVideo(4)">
-                      <i class="fa fa-arrow-left"></i>
-                    </button>
-                  </td>
-                </tr>
-              </table>
-              <div class="title">Analytic 2</div>
-              <table class="cameraPanelOption">
-                <tr>
-                  <td>
-                    <img class="snapShot" src="stream/9" />
-                  </td>
-                  <td>
-                    <button class="videoButton" onclick="handleVideoButtonClick(9)">
-                      <i class="fa fa-arrow-right"></i>
-                    </button>
-                    <button class="videoButton" onclick="clearVideo(9)">
-                      <i class="fa fa-arrow-left"></i>
-                    </button>
-                  </td>
-                </tr>
-              </table>
-              <div class="title">Analytic 3</div>
-              <table class="cameraPanelOption">
-                <tr>
-                  <td>
-                    <img class="snapShot" src="/stream/10" />
-                  </td>
-                  <td>
-                    <button class="videoButton" onclick="handleVideoButtonClick(10)">
-                      <i class="fa fa-arrow-right"></i>
-                    </button>
-                    <button class="videoButton" onclick="clearVideo(10)">
-                      <i class="fa fa-arrow-left"></i>
-                    </button>
-                  </td>
-                </tr>
-              </table>
-              <div class="title">Analytic 2</div>
-              <table class="cameraPanelOption">
-                <tr>
-                  <td>
-                    <img class="snapShot" src="stream/11" />
-                  </td>
-                  <td>
-                    <button class="videoButton" onclick="handleVideoButtonClick(11)">
-                      <i class="fa fa-arrow-right"></i>
-                    </button>
-                    <button class="videoButton" onclick="clearVideo(11)">
-                      <i class="fa fa-arrow-left"></i>
-                    </button>
-                  </td>
-                </tr>
-              </table>
-              <div class="title">Analytic 3</div>
-              <table class="cameraPanelOption">
-                <tr>
-                  <td>
-                    <img class="snapShot" src="/stream/12" />
-                  </td>
-                  <td>
-                    <button class="videoButton" onclick="handleVideoButtonClick(12)">
-                      <i class="fa fa-arrow-right"></i>
-                    </button>
-                    <button class="videoButton" onclick="clearVideo(12)">
-                      <i class="fa fa-arrow-left"></i>
-                    </button>
-                  </td>
-                </tr>
-              </table>
-            </li>
-          </ul>
-        </div>
-      </div>
+      {% endfor %}
     </div>
 
     <div class="col-md-10">
       <table class="table">
-        <tbody>
-          <tr>
+        <tbody id="videoWrapper">
+          <!-- <tr>
             <td style="background-color: transparent; border: none;">
               <div style="color: white; font-weight: 600; margin-bottom: 5px;">Live : <span id="liveName1"></span></div>
               <div id="videoCell1"
@@ -299,63 +123,11 @@
             <td style="background-color: transparent; border: none;">
               <div style="color: white; font-weight: 600; margin-bottom: 5px;">Live : <span id="liveName3"></span></div>
               <div id="videoCell3"
-                style="height: 300px; width: 370px; background-color: transparent; border: 1px solid white;"></div>
-            </td>
-          </tr>
-          <tr>
-            <td style="background-color: transparent; border: none;">
-              <div style="color: white; font-weight: 600; margin-bottom: 5px;">Live : <span id="liveName4"></span></div>
-              <div id="videoCell4"
-                style="height: 300px; width: 370px; background-color: transparent; border: 1px solid white;"></div>
-            </td>
-            <td style="background-color: transparent; border: none;">
-              <div style="color: white; font-weight: 600; margin-bottom: 5px;">Live : <span id="liveName5"></span></div>
-              <div id="videoCell5"
-                style="height: 300px; width: 370px; background-color: transparent; border: 1px solid white;"></div>
-            </td>
-            <td style="background-color: transparent; border: none;">
-              <div style="color: white; font-weight: 600; margin-bottom: 5px;">Live : <span id="liveName6"></span></div>
-              <div id="videoCell6"
-                style="height: 300px; width: 370px; background-color: transparent; border: 1px solid white;"></div>
-            </td>
-          </tr>
-          <tr>
-            <td style="background-color: transparent; border: none;">
-              <div style="color: white; font-weight: 600; margin-bottom: 5px;">Live : <span id="liveName7"></span></div>
-              <div id="videoCell7"
-                style="height: 300px; width: 370px; background-color: transparent; border: 1px solid white;"></div>
-            </td>
-            <td style="background-color: transparent; border: none;">
-              <div style="color: white; font-weight: 600; margin-bottom: 5px;">Live : <span id="liveName8"></span></div>
-              <div id="videoCell8"
-                style="height: 300px; width: 370px; background-color: transparent; border: 1px solid white;"></div>
-            </td>
-            <td style="background-color: transparent; border: none;">
-              <div style="color: white; font-weight: 600; margin-bottom: 5px;">Live : <span id="liveName9"></span></div>
-              <div id="videoCell9"
-                style="height: 300px; width: 370px; background-color: transparent; border: 1px solid white;"></div>
-            </td>
-          </tr>
-          <tr>
-            <td style="background-color: transparent; border: none;">
-              <div style="color: white; font-weight: 600; margin-bottom: 5px;">Live : <span id="liveName10"></span>
+                style="height: 300px; width: 370px; background-color: transparent; border: 1px solid white;">
+                
               </div>
-              <div id="videoCell10"
-                style="height: 300px; width: 370px; background-color: transparent; border: 1px solid white;"></div>
             </td>
-            <td style="background-color: transparent; border: none;">
-              <div style="color: white; font-weight: 600; margin-bottom: 5px;">Live : <span id="liveName11"></span>
-              </div>
-              <div id="videoCell11"
-                style="height: 300px; width: 370px; background-color: transparent; border: 1px solid white;"></div>
-            </td>
-            <td style="background-color: transparent; border: none;">
-              <div style="color: white; font-weight: 600; margin-bottom: 5px;">Live : <span id="liveName12"></span>
-              </div>
-              <div id="videoCell12"
-                style="height: 300px; width: 370px; background-color: transparent; border: 1px solid white;"></div>
-            </td>
-          </tr>
+          </tr> -->
         </tbody>
       </table>
     </div>
@@ -373,6 +145,25 @@
 
   <script>
     let currentTdIndex = 1; // Variabel untuk melacak indeks sel <td> saat ini
+    
+    function toggleShowAll(groupName){
+      const imageElement = document.getElementById(groupName).querySelectorAll("img")
+      const videoWrapper = document.getElementById("videoWrapper")
+      videoWrapper.innerHTML = ""
+      let cameraList = []
+      for(let i = 0; i < Math.ceil(imageElement.length/3); i++){
+        let trElement = document.createElement("tr")
+        for(let j = 0; j < 3 && (i*3)+j < imageElement.length; j++){
+          let cameraId = imageElement[(i*3)+j].getAttribute("data-camera-id")
+          let tdElement = document.createElement("td")
+          tdElement.style.backgroundColor = "transparent"
+          tdElement.style.border = "none"
+          tdElement.innerHTML = `<div style="color: white; font-weight: 600; margin-bottom: 5px;">Live : <span id="liveName${cameraId}"></span></div> <div id="videoCell${cameraId}" style="height: 300px; width: 370px; background-color: transparent; border: 1px solid white;"><img width="370" height="300" src="/stream/${cameraId}" id="video${cameraId}"></div>`
+          trElement.appendChild(tdElement)
+        }
+        videoWrapper.appendChild(trElement)
+      }
+    }
 
     function handleVideoButtonClick(videoNumber) {
       const targetTd = document.getElementById(`videoCell${videoNumber}`);

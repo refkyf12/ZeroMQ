@@ -8,6 +8,7 @@ with open('config/config.json', 'r') as config_file:
 
 app = Flask(__name__, static_folder='../static/')
 app.static_folder = 'static'
+runProcess = []
 
 # CAMERAS = [
 #    (1, "tcp://10.200.0.161:5555"),
@@ -32,7 +33,13 @@ def gen(id):
 
 @app.route('/')
 def index():
-  return render_template('/index.html')
+  cameras = {}
+  for key in config["cameras"].keys():
+    if config["cameras"][key]["lokasi_kamera"] in cameras:
+      cameras[config["cameras"][key]["lokasi_kamera"]].append(config["cameras"][key]["id"])
+    else:
+      cameras[config["cameras"][key]["lokasi_kamera"]] = [config["cameras"][key]["id"]]
+  return render_template('/index.html', cameras=cameras)
 
 @app.route('/manage')
 def manage():
@@ -48,11 +55,17 @@ def manageCreate():
     'zmq_address': request.form.get('zmq'),
     'address': request.form.get('address'),
     'status': int(request.form.get('status')),
-    'lokasi_kamera': request.form.get('lokasi_kamera')
+    'lokasi_kamera': request.form.get('lokasi_kamera'),
+    'client': request.form.get('client_kamera')
   }
 
   with open('config/config.json', 'w') as f:
     json.dump(config, f)
+
+  for process in runProcess:
+    process.terminate()
+  
+  # runProcess = [Popen([config["python_env"], f"client/{config['cameras'][key]['client']}"]) for key in config["cameras"].keys() if config["cameras"][key]["status"] == 1]
 
   return redirect("/manage")
 
@@ -65,11 +78,17 @@ def manageEdit():
     'zmq_address': request.form.get('zmq'),
     'address': request.form.get('address'),
     'status': int(request.form.get('status')),
-    'lokasi_kamera': request.form.get('lokasi_kamera')
+    'lokasi_kamera': request.form.get('lokasi_kamera'),
+    'client': request.form.get('client_kamera')
   }
 
   with open('config/config.json', 'w') as f:
     json.dump(config, f)
+
+  for process in runProcess:
+    process.terminate()
+  
+  # runProcess = [Popen([config["python_env"], f"client/{config['cameras'][key]['client']}"]) for key in config["cameras"].keys() if config["cameras"][key]["status"] == 1]
 
   return redirect("/manage")
 
@@ -96,6 +115,6 @@ def camera(id):
 
 if __name__ == '__main__':
   # runProcess = [Popen([config["python_env"],f"{config["client"]["client_folder"]}{client}"]) for client in config["client"]["clients"]]
-  runProcess = [Popen([config["python_env"], f"client/{client}"]) for client in config["client"]["clients"]]
+  # runProcess = [Popen([config["python_env"], f"client/{config['cameras'][key]['client']}"]) for key in config["cameras"].keys() if config["cameras"][key]["status"] == 1]
 
   app.run(debug=True, host="0.0.0.0")
