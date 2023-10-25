@@ -33,6 +33,7 @@ def gen(id):
 
 @app.route('/')
 def index():
+  global runProcess
   if len(runProcess) > 0:
     for process in runProcess:
       process.kill()
@@ -49,6 +50,11 @@ def index():
 
 @app.route('/manage')
 def manage():
+  global runProcess
+  if len(runProcess) > 0:
+    for process in runProcess:
+      process.kill()
+      
   return render_template('/manage.html', cameras=config["cameras"])
 
 @app.route('/manage/create', methods=["POST"])
