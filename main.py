@@ -33,6 +33,12 @@ def gen(id):
 
 @app.route('/')
 def index():
+  if len(runProcess) > 0:
+    for process in runProcess:
+      process.kill()
+
+  runProcess = [Popen([config["python_env"], f"client/{config['cameras'][key]['client']}"]) for key in config["cameras"].keys() if config["cameras"][key]["status"] == 1]
+  
   cameras = {}
   for key in config["cameras"].keys():
     if config["cameras"][key]["lokasi_kamera"] in cameras:
@@ -62,11 +68,6 @@ def manageCreate():
   with open('config/config.json', 'w') as f:
     json.dump(config, f)
 
-  for process in runProcess:
-    process.terminate()
-  
-  runProcess = [Popen([config["python_env"], f"client/{config['cameras'][key]['client']}"]) for key in config["cameras"].keys() if config["cameras"][key]["status"] == 1]
-
   return redirect("/manage")
 
 @app.route('/manage/edit', methods=["POST"])
@@ -84,11 +85,6 @@ def manageEdit():
 
   with open('config/config.json', 'w') as f:
     json.dump(config, f)
-
-  for process in runProcess:
-    process.terminate()
-  
-  runProcess = [Popen([config["python_env"], f"client/{config['cameras'][key]['client']}"]) for key in config["cameras"].keys() if config["cameras"][key]["status"] == 1]
 
   return redirect("/manage")
 
@@ -115,6 +111,5 @@ def camera(id):
 
 if __name__ == '__main__':
   # runProcess = [Popen([config["python_env"],f"{config["client"]["client_folder"]}{client}"]) for client in config["client"]["clients"]]
-  runProcess = [Popen([config["python_env"], f"client/{config['cameras'][key]['client']}"]) for key in config["cameras"].keys() if config["cameras"][key]["status"] == 1]
 
   app.run(debug=True, host="0.0.0.0")
