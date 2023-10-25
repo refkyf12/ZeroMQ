@@ -34,7 +34,12 @@
           <td scope="row">{{cameras[key]['rtsp_url']}}</td>
           <td scope="row">{{cameras[key]['zmq_address']}}</td>
           <td scope="row">{{cameras[key]['address']}}</td>
-          <td scope="row">{{cameras[key]['status']}}</td>
+          {% if cameras[key]['status'] == 1 %}
+          <td scope="row">Aktif</td>
+          {% endif %}
+          {% if cameras[key]['status'] == 2 %}
+          <td scope="row">Nonaktif</td>
+          {% endif %}
           <td scope="row">{{cameras[key]['lokasi_kamera']}}</td>
           <td scope="row">
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editKamera"
@@ -81,8 +86,10 @@
             </div>
             <div class="mb-3">
               <label for="exampleInputStatus1" class="form-label">Status</label>
-              <input type="text" name="status" class="form-control" id="exampleInputStatus1"
-                aria-describedby="StatusHelp">
+              <select name="status" id="exampleInputStatus1">
+                <option value="1">Aktifkan</option>
+                <option value="2">Nonaktifkan</option>
+              </select>
             </div>
             <div class="mb-3">
               <label for="exampleInputLokasi1" class="form-label">Lokasi Kamera</label>
@@ -132,8 +139,10 @@
             </div>
             <div class="mb-3">
               <label for="editInputStatus" class="form-label">Status</label>
-              <input type="text" name="status" class="form-control" id="editInputStatus"
-                aria-describedby="StatusHelp">
+              <select name="status" id="editInputStatus">
+                <option value="1">Aktifkan</option>
+                <option value="2">Nonaktifkan</option>
+              </select>
             </div>
             <div class="mb-3">
               <label for="editInputLokasi" class="form-label">Lokasi Kamera</label>

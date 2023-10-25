@@ -47,7 +47,7 @@ def manageCreate():
     'rtsp_url': request.form.get('rtsp'),
     'zmq_address': request.form.get('zmq'),
     'address': request.form.get('address'),
-    'status': request.form.get('status'),
+    'status': int(request.form.get('status')),
     'lokasi_kamera': request.form.get('lokasi_kamera')
   }
 
@@ -64,7 +64,7 @@ def manageEdit():
     'rtsp_url': request.form.get('rtsp'),
     'zmq_address': request.form.get('zmq'),
     'address': request.form.get('address'),
-    'status': request.form.get('status'),
+    'status': int(request.form.get('status')),
     'lokasi_kamera': request.form.get('lokasi_kamera')
   }
 
