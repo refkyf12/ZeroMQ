@@ -19,15 +19,16 @@ class AnalyticClient:
     port = "6000"
     ip = "127.0.0.1"
     rtsp = "rtsp://admin:rastek123@10.50.0.13/cam/realmonitor?channel=1&subtype=00"
-    weight = "models/yolov3-tiny.weights"
-    config = "models/yolov3-tiny.cfg"
-    kelas = "models/coco.names"
+    weight = "../models/yolov3-tiny.weights"
+    config = "../models/yolov3-tiny.cfg"
+    kelas = "../models/coco.names"
     cap = None
     manager = Manager()
     var_manager = manager.dict({'image' : None, 'time_process': 0,})
     inputQueue = Queue(maxsize=10)
     outputQueue = Queue(maxsize=10)
     frameQueue = Queue(maxsize=10)
+    net = cv2.dnn.readNet(weight, config)
     detections = None
     p_detect = None
     p_classify_frame = None
@@ -42,6 +43,7 @@ class AnalyticClient:
         self.ip = ip
     def setRtsp(self, rtsp):
         self.rtsp = rtsp
+        self.cap = cv2.VideoCapture(rtsp)
     def setWeight(self, weight):
         self.weight = weight
     def setConfig(self, config):
@@ -49,24 +51,24 @@ class AnalyticClient:
     def setKelas(self, kelas):
         self.kelas = kelas
     
-    def classify_frame(self,net, inputQueue, outputQueue):
+    def classify_frame(self):
         while True:
             # time.sleep(delay)
-            if not inputQueue.empty():
+            if not self.inputQueue.empty():
             
                 start_time_process = time.time()
                 
-                image = inputQueue.get()
+                image = self.inputQueue.get()
                 blob = cv2.dnn.blobFromImage(image, 0.00392, (412, 412), (0, 0, 0), True, crop=False)
-                net.setInput(blob)
-                detections = net.forward(getOutputsNames(net))
+                self.net.setInput(blob)
+                self.detections = self.net.forward(getOutputsNames(self.net))
             
                 end_time_process = time.time()
                 
                 time_process = end_time_process - start_time_process
                 self.var_manager['time_process'] = "{:.2f}".format(time_process)
                 
-                outputQueue.put(detections)
+                self.outputQueue.put(self.detections)
     
     def detect(self):
         # with open('config/config.json', 'r') as config_file:
@@ -88,6 +90,7 @@ class AnalyticClient:
             # time.sleep(delay)
             
             hasFrame, image = self.cap.read() # opencv
+            print(self.cap.read())
             # image = cap.read() # imutils
             
             if image is None:
@@ -103,16 +106,16 @@ class AnalyticClient:
                 self.inputQueue.put(image)
 
             if not self.outputQueue.empty():
-                detections = self.outputQueue.get()
+                self.detections = self.outputQueue.get()
             
             # Showing informations on the screen
             class_ids = []
             confidences = []
             boxes = []
 
-            if detections is not None:
+            if self.detections is not None:
                 
-                for out in detections:	
+                for out in self.detections:	
                     for detection in out:
                         scores = detection[5:]
                         class_id = np.argmax(scores)
@@ -148,13 +151,12 @@ class AnalyticClient:
         prevTime = 0
         context = zmq.Context()
         footage_socket = context.socket(zmq.PUB)
-        footage_socket.bind(f"tcp//*:{self.port}")
+        footage_socket.bind(f"tcp://*:{self.port}")
         
         while True:
             # time.sleep(delay)
             if self.frameQueue.empty() !=True:
                 image = self.frameQueue.get()
-                
                 currTime = time.time()
                 fps = 1 / (currTime - prevTime)
                 prevTime = currTime
@@ -178,9 +180,8 @@ class AnalyticClient:
     
     def run(self):
         print("[INFO] starting process...")
-        net = cv2.dnn.readNet(self.weight, self.config)
         self.p_detect = Process(target=self.detect)
-        self.p_classify_frame = Process(target=self.classify_frame, args=(net, self.inputQueue, self.outputQueue,))
+        self.p_classify_frame = Process(target=self.classify_frame)
         self.p_output = Process(target=self.output)
         
         self.p_classify_frame.start()

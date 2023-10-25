@@ -38,7 +38,7 @@ def index():
     for process in runProcess:
       process.kill()
 
-  runProcess = [Popen([config["python_env"], f"client/{config['cameras'][key]['client']}"]) for key in config["cameras"].keys() if config["cameras"][key]["status"] == 1]
+  # runProcess = [Popen([config["python_env"], f"client/{config['cameras'][key]['client']}"]) for key in config["cameras"].keys() if config["cameras"][key]["status"] == 1]
   
   cameras = {}
   for key in config["cameras"].keys():
