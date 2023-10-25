@@ -4,84 +4,108 @@
             "id": 1,
             "rtsp_url": "rtsp://admin:rastek123@10.50.0.13/cam/realmonitor?channel=1&subtype=00",
             "zmq_address": "tcp://*:6660",
-            "address": "tcp://localhost:6660"
+            "address": "tcp://localhost:6660",
+            "status" : 1,
+            "lokasi_kamera" : "JPO 1"
         }
         ,
         "camera_2": {
             "id": 2,
             "rtsp_url": "rtsp://admin:rastek123@10.50.0.13/cam/realmonitor?channel=1&subtype=00",
             "zmq_address": "tcp://*:6661",
-            "address": "tcp://localhost:6661"
+            "address": "tcp://localhost:6661",
+            "status" : 1,
+            "lokasi_kamera" : "JPO 1"
         }
         ,
         "camera_3": {
             "id": 3,
             "rtsp_url": "rtsp://admin:rastek123@10.50.0.13/cam/realmonitor?channel=1&subtype=00",
             "zmq_address": "tcp://*:6662",
-            "address": "tcp://localhost:6662"
+            "address": "tcp://localhost:6662",
+            "status" : 1,
+            "lokasi_kamera" : "JPO 1"
         }
         ,
         "camera_4": {
             "id": 4,
             "rtsp_url": "rtsp://admin:rastek123@10.50.0.13/cam/realmonitor?channel=1&subtype=00",
             "zmq_address": "tcp://*:6663",
-            "address": "tcp://localhost:6663"
+            "address": "tcp://localhost:6663",
+            "status" : 1,
+            "lokasi_kamera" : "JPO 1"
         }
         ,
         "camera_5": {
             "id": 5,
             "rtsp_url": "rtsp://admin:rastek123@10.50.0.13/cam/realmonitor?channel=1&subtype=00",
             "zmq_address": "tcp://*:6664",
-            "address": "tcp://localhost:6664"
+            "address": "tcp://localhost:6664",
+            "status" : 1,
+            "lokasi_kamera" : "JPO 1"
         }
         ,
         "camera_6": {
             "id": 6,
             "rtsp_url": "rtsp://admin:rastek123@10.50.0.13/cam/realmonitor?channel=1&subtype=00",
             "zmq_address": "tcp://*:6665",
-            "address": "tcp://localhost:6665"
+            "address": "tcp://localhost:6665",
+            "status" : 1,
+            "lokasi_kamera" : "JPO 1"
         }
         ,
         "camera_7": {
             "id": 7,
             "rtsp_url": "rtsp://admin:rastek123@10.50.0.13/cam/realmonitor?channel=1&subtype=00",
             "zmq_address": "tcp://*:6666",
-            "address": "tcp://localhost:6666"
+            "address": "tcp://localhost:6666",
+            "status" : 1,
+            "lokasi_kamera" : "JPO 1"
         }
         ,
         "camera_8": {
             "id": 8,
             "rtsp_url": "rtsp://admin:rastek123@10.50.0.13/cam/realmonitor?channel=1&subtype=00",
             "zmq_address": "tcp://*:6667",
-            "address": "tcp://localhost:6667"
+            "address": "tcp://localhost:6667",
+            "status" : 1,
+            "lokasi_kamera" : "JPO 1"
         }
         ,
         "camera_9": {
             "id": 9,
             "rtsp_url": "rtsp://admin:rastek123@10.50.0.13/cam/realmonitor?channel=1&subtype=00",
             "zmq_address": "tcp://*:6668",
-            "address": "tcp://localhost:6668"
+            "address": "tcp://localhost:6668",
+            "status" : 1,
+            "lokasi_kamera" : "JPO 1"
         }
         ,
         "camera_10": {
             "id": 10,
             "rtsp_url": "rtsp://admin:rastek123@10.50.0.13/cam/realmonitor?channel=1&subtype=00",
             "zmq_address": "tcp://*:6669",
-            "address": "tcp://localhost:6669"
+            "address": "tcp://localhost:6669",
+            "status" : 1,
+            "lokasi_kamera" : "JPO 1"
         }
         ,
         "camera_11": {
             "id": 11,
             "rtsp_url": "rtsp://admin:rastek123@10.50.0.13/cam/realmonitor?channel=1&subtype=00",
             "zmq_address": "tcp://*:6670",
-            "address": "tcp://localhost:6670"
+            "address": "tcp://localhost:6670",
+            "status" : 1,
+            "lokasi_kamera" : "JPO 1"
         }
         ,
         "camera_12": {
             "id": 12,
             "rtsp_url": "rtsp://admin:rastek123@10.50.0.13/cam/realmonitor?channel=1&subtype=00",
             "zmq_address": "tcp://*:6671",
-            "address": "tcp://localhost:6671"
+            "address": "tcp://localhost:6671",
+            "status" : 1,
+            "lokasi_kamera" : "JPO 1"
         
         }
     },

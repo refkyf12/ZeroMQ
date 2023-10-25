@@ -46,7 +46,9 @@ def manageCreate():
     'id': newId,
     'rtsp_url': request.form.get('rtsp'),
     'zmq_address': request.form.get('zmq'),
-    'address': request.form.get('address')
+    'address': request.form.get('address'),
+    'status': request.form.get('status'),
+    'lokasi_kamera': request.form.get('lokasi_kamera')
   }
 
   with open('config/config.json', 'w') as f:
@@ -61,7 +63,9 @@ def manageEdit():
     'id': config["cameras"][key]['id'],
     'rtsp_url': request.form.get('rtsp'),
     'zmq_address': request.form.get('zmq'),
-    'address': request.form.get('address')
+    'address': request.form.get('address'),
+    'status': request.form.get('status'),
+    'lokasi_kamera': request.form.get('lokasi_kamera')
   }
 
   with open('config/config.json', 'w') as f:
