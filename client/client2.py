@@ -1,195 +1,211 @@
-import base64
-import cv2
-import zmq
-import numpy as np
-import time
-import threading
-import cv2
-import time
+import sys
+sys.path.append('/home/rastekid/Projects/GETI/Code')
+sys.path.insert(0, '../')
+from tracker.centroidtracker import CentroidTracker
+from tracker.trackableobject import TrackableObject
+
+from imutils.video import FPS
+from geti_sdk.deployment import Deployment
+
+import logging
+import imutils
+import dlib
 import json
 import os
+import time
+import cv2
+import zmq
+import base64
 
-from imutils.video import VideoStream, FileVideoStream
-from multiprocessing import Process
-from multiprocessing import Queue
-from multiprocessing import Manager
+import helper
 
+logging.basicConfig(level = logging.INFO, format = "[INFO] %(message)s")
+logger = logging.getLogger(__name__)
 
-from utils.helper import getOutputsNames, draw_pred
-
-with open('config/config.json', 'r') as config_file:
+with open('../config/config.json', 'r') as config_file:
     config = json.load(config_file)
 
-kamera_id = "camera_2"
-rtsp_url = config["cameras"][kamera_id]["rtsp_url"]
-zmq_address = config["cameras"][kamera_id]["zmq_address"]
-delay = 0
+kamera_id = 2
+camera = list(filter(lambda x: x["id"] == kamera_id, config["cameras"]))[0]
+zmq_address = camera["zmq_address"]
+rtsp_url = camera["rtsp_url"]
+deployment = camera["deployment"]
+tmp = camera["tmp"]
+det_duration = camera["det_duration"]
 
-def classify_frame(net, inputQueue, outputQueue):
+def people_counter(video_path, offline_deployment):
     
-    while True:
-        
-        # time.sleep(delay)
-        if not inputQueue.empty():
-        
-            start_time_process = time.time()
-            
-            image = inputQueue.get()
-            blob = cv2.dnn.blobFromImage(image, 0.00392, (412, 412), (0, 0, 0), True, crop=False)
-            net.setInput(blob)
-            detections = net.forward(getOutputsNames(net))
-        
-            end_time_process = time.time()
-            
-            time_process = end_time_process - start_time_process
-            var_manager['time_process'] = "{:.2f}".format(time_process)
-            
-            outputQueue.put(detections)
-
-def detect():
-    global detections
-
-    # with open('config/config.json', 'r') as config_file:
-    #     config = json.load(config_file)
-
-    # kamera_id = "camera_1"
-    # rtsp_url = config["cameras"][kamera_id]["rtsp_url"]
-
-    print("ID Kamera:", kamera_id)
-    print("RTSP URL:", rtsp_url)
-    # print("ZMQ Address:", zmq_address)
+    logger.info("Starting the video..")
+    vs = cv2.VideoCapture(video_path)
     
-    # cap = FileVideoStream(config['cam']).start() # Load Video
-    # cap = VideoStream(config['cam']).start()
-    cap = cv2.VideoCapture(rtsp_url)
+    W = H = None
 
-    with open(config["model"]["class"], "r") as f:
-        classes = f.read().strip().split('\n')\
-
-    colors = np.random.uniform(0, 255, size=(len(classes), 3))
+    ct = CentroidTracker(maxDisappeared=40, maxDistance=50)
     
-    while True:
-        # time.sleep(delay)
-        
-        hasFrame, image = cap.read() # opencv
-        # image = cap.read() # imutils
-        
-        if image is None:
-            image = np.zeros((1020,480,3), dtype=np.uint8)
-            continue
-        
-        Width = image.shape[1]
-        Height = image.shape[0]
+    trackers = []
+    trackableObjects = {}
+    totalFrames = 0
+    
+    fps = FPS().start()
+    
+    start_time = time.time()
+    count = 0
+    _alert_ = False
+    
+    object_id = []
+    object_id_tmp = []
 
-        if inputQueue.full():
-            continue
-        else:
-            inputQueue.put(image)
-
-        if not outputQueue.empty():
-            detections = outputQueue.get()
-        
-        # Showing informations on the screen
-        class_ids = []
-        confidences = []
-        boxes = []
-
-        if detections is not None:
-            
-            for out in detections:	
-                for detection in out:
-                    scores = detection[5:]
-                    class_id = np.argmax(scores)
-                    confidence = scores[class_id]
-                    
-                    if confidence > 0.6:
-                        
-                        center_x = int(detection[0] * Width)
-                        center_y = int(detection[1] * Height)
-                        w = int(detection[2] * Width)
-                        h = int(detection[3] * Height)
-                        x = center_x - w / 2
-                        y = center_y - h / 2
-                        class_ids.append(class_id)
-                        confidences.append(float(confidence))
-                        boxes.append([x,y,w,h])
-                    
-
-            indices = cv2.dnn.NMSBoxes(boxes, confidences, 0.5, 0.4)
-               
-            for i in range(len(boxes)):
-                for i in indices:
-                    box = boxes[i]
-                    x = box[0]
-                    y = box[1]
-                    w = box[2]
-                    h = box[3]	
-                    draw_pred(classes, colors, image, class_ids[i], confidences[i], round(x), round(y), round(x+w), round(y+h))              
-            
-            frameQueue.put(image)
-
-def output():
-    print("ID Kamera:", kamera_id)
-    print("zmq_address URL:", zmq_address)
-
-    prevTime = 0
     context = zmq.Context()
     footage_socket = context.socket(zmq.PUB)
     footage_socket.bind(zmq_address)
     
     while True:
-        # time.sleep(delay)
-        if frameQueue.empty() !=True:
-            image = frameQueue.get()
-            
-            currTime = time.time()
-            fps = 1 / (currTime - prevTime)
-            prevTime = currTime
-            cv2.putText(image, str(round(fps,2)), (10, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 1) #FPS Value
-                
-            var_manager['image'] = image
-            
-            print('')
-            print("PROCESS DETEKSI : ", var_manager['time_process'])
-            print("QUEUE Input ", inputQueue.qsize())
-            # print("QUEUE Frame ", frameQueue.qsize())
-            print("FPS:", fps)
-            
-            image = cv2.resize(image,(720, 420))
-            encoded, buffer = cv2.imencode('.jpg', image)
-            jpg_as_text = base64.b64encode(buffer)
-            footage_socket.send(jpg_as_text)
-
-        if cv2.waitKey(1) & 0xFF == ord('q'):
+        
+        time.sleep(.05)
+        
+        frame = vs.read()
+        frame = frame[1]
+        if frame is None:
             break
+            
+        frame = imutils.resize(frame, width = 2000)
+        rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
-# Mulai thread untuk pengiriman frame
+        if W is None or H is None:
+            (H, W) = frame.shape[:2]
+
+        rects = []
+
+        if totalFrames % 10 == 0:
+            trackers = []
+            
+            start_time_process = time.time()
+            numpy_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+            detections = offline_deployment.infer(numpy_rgb)
+            end_time_process = time.time()
+            
+            time_process = end_time_process - start_time_process
+            infer_process = "{:.2f}".format(time_process)
+            
+            # print('INFER PROCCESS : ', infer_process)
+            
+            for annot in detections.annotations:
+                for lab in annot.labels:
+                    scores = lab.probability
+                    classId = lab.name
+                    
+                    confidence = scores
+                    if confidence > 0.5 and (classId != 'No Object'):
+                        _alert_ = True
+                        center_x = int(annot.shape.x * W)
+                        center_y = int(annot.shape.y * H)
+                        width = int(annot.shape.width * W)
+                        height = int(annot.shape.height * H)
+                        left = int(center_x - width / 2)
+                        top = int(center_y - height / 2)
+                        cv2.rectangle(frame, (left, top), (left + width, top + height), (0, 255, 0), 2)
+                        
+                        tracker = dlib.correlation_tracker()
+                        rect = dlib.rectangle(int(annot.shape.x), int(annot.shape.y), int(annot.shape.x+annot.shape.width) , int(annot.shape.y+annot.shape.height))
+                        tracker.start_track(numpy_rgb, rect)
+                        trackers.append(tracker)
+
+        else:
+            for tracker in trackers:
+                
+                tracker.update(rgb)
+                pos = tracker.get_position()
+                startX = int(pos.left())
+                startY = int(pos.top())
+                endX = int(pos.right())
+                endY = int(pos.bottom())
+                rects.append((startX, startY, endX, endY))
+                
+        objects = ct.update(rects)
+
+        object_id = []
+        for (objectID, centroid) in objects.items():
+            to = trackableObjects.get(objectID, None)
+
+            if to is None:
+                to = TrackableObject(objectID, centroid)
+            else:
+                to.centroids.append(centroid)
+
+            trackableObjects[objectID] = to
+            object_id.append(objectID)
+            text = "ID {}".format(objectID)
+            cv2.putText(frame, classId, (centroid[0] - 10, centroid[1] - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2)
+            cv2.rectangle(frame, (centroid[0] - 10, centroid[1] - 10), (centroid[0] + 10, centroid[1] + 10), (0, 255, 0), 2)
+
+        # print(_alert_)
+        current_time = time.time()
+        elapsed_time = current_time - start_time
+        
+        unique_id = set(object_id)
+        unique_id_ = list(unique_id)
+
+        diff_unique_id = [item for item in unique_id_ if item not in object_id_tmp]
+            
+
+        if _alert_ :
+            if elapsed_time >= 1.0:
+                count += 1
+                start_time = current_time
+                
+        if count >= det_duration :
+            
+            print(len(objects))
+            print('obj sebelumnya : ', object_id_tmp, '| jumlah : ' + str(len(object_id_tmp)))
+            print('obj sekarang : ', unique_id_, '| jumlah : ' + str(len(unique_id_)))
+            print('diff array : ', diff_unique_id)
+            
+            object_id_tmp = unique_id_
+            
+            ts = helper.timestamp("%Y%m%d%H%M%S")
+            
+            img_name = ts + '.jpg'
+            img_path = tmp
+            obj_count = len(diff_unique_id)
+            
+            
+            ## KIRIM DATA ##
+            if obj_count > 0 :
+                cv2.imwrite(img_path + img_name, frame)
+                print(obj_count)
+                
+                # helper.send_mqtt(img_path, img_name, obj_count)
+            
+            object_id = []
+            _alert_ = False
+            count = 0
+
+        cv2.putText(frame, str(len(diff_unique_id)), (60, 40), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 5)
+        # cv2.imshow("Real-Time Monitoring/Analysis Window", frame)
+        
+        frame = cv2.resize(frame,(720, 420))
+        encoded, buffer = cv2.imencode('.jpg', frame)
+        jpg_as_text = base64.b64encode(buffer)
+        footage_socket.send(jpg_as_text)
+        
+        key = cv2.waitKey(1) & 0xFF
+        
+        if key == ord("q"):
+            break
+        
+        totalFrames += 1
+        fps.update()
+
+    fps.stop()
+    logger.info("Elapsed time: {:.2f}".format(fps.elapsed()))
+    logger.info("Approx. FPS: {:.2f}".format(fps.fps()))
+
+    cv2.destroyAllWindows()
+
 if __name__ == "__main__":
-
+    print("[INFO] loading deployment...")
     
-    manager = Manager()
+    offline_deployment = Deployment.from_folder(deployment)
+    offline_deployment.load_inference_models(device="CPU")
     
-    # LOAD MODEL AND CONFIG
-    net = cv2.dnn.readNet(config["model"]["weight"], config["model"]["config"])
-
-    # net = cv2.dnn.readNetFromDarknet(config['model'], config['config'])
-    
-    var_manager = manager.dict({'image' : None, 'time_process': 0,})
-    
-    inputQueue = Queue(maxsize=10)
-    outputQueue = Queue(maxsize=10)
-    frameQueue = Queue(maxsize=10)
-    detections = None
-
-    print("[INFO] starting process...")
-    p_detect = Process(target=detect)
-    p_classify_frame = Process(target=classify_frame, args=(net, inputQueue, outputQueue,))
-    p_output = Process(target=output)
-    
-    p_classify_frame.start()
-    p_detect.start()
-    p_output.start()
-    
-    p_detect.join()
-    p_classify_frame.join()
-    p_output.join()
+    people_counter(rtsp_url, offline_deployment)

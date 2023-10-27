@@ -26,9 +26,10 @@ runProcess = []
 # ]
 
 def gen(id):
-  print([config["cameras"][key]["address"] for key in config["cameras"].keys() if config["cameras"][key]["id"] == int(id)])
+  camera = list(filter(lambda x: x["id"] == int(id), config["cameras"]))[0]
+  print(camera)
   while True:
-      stream = streamer([config["cameras"][key]["address"] for key in config["cameras"].keys() if config["cameras"][key]["id"] == int(id)][0])
+      stream = streamer(camera["address"])
       yield (b'--frame\r\n'b'Content-Type: image/jpeg\r\n\r\n' + stream + b'\r\n\r\n')
 
 @app.route('/')
@@ -41,11 +42,16 @@ def index():
   # runProcess = [Popen([config["python_env"], f"client/{config['cameras'][key]['client']}"]) for key in config["cameras"].keys() if config["cameras"][key]["status"] == 1]
   
   cameras = {}
-  for key in config["cameras"].keys():
-    if config["cameras"][key]["lokasi_kamera"] in cameras:
-      cameras[config["cameras"][key]["lokasi_kamera"]].append(config["cameras"][key]["id"])
+  for camera in config["cameras"]:
+    if camera["lokasi_kamera"] in cameras:
+      cameras[camera["lokasi_kamera"]].append(camera["id"])
     else:
-      cameras[config["cameras"][key]["lokasi_kamera"]] = [config["cameras"][key]["id"]]
+      cameras[camera["lokasi_kamera"]] = [camera["id"]]
+  # for key in config["cameras"].keys():
+  #   if config["cameras"][key]["lokasi_kamera"] in cameras:
+  #     cameras[config["cameras"][key]["lokasi_kamera"]].append(config["cameras"][key]["id"])
+  #   else:
+  #     cameras[config["cameras"][key]["lokasi_kamera"]] = [config["cameras"][key]["id"]]
   return render_template('/index.html', cameras=cameras)
 
 @app.route('/manage')

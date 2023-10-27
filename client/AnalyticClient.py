@@ -18,7 +18,7 @@ from utils.helper import getOutputsNames, draw_pred
 class AnalyticClient:
     port = "6000"
     ip = "127.0.0.1"
-    rtsp = "rtsp://admin:rastek123@10.50.0.13/cam/realmonitor?channel=1&subtype=00"
+    rtsp = 0
     weight = "../models/yolov3-tiny.weights"
     config = "../models/yolov3-tiny.cfg"
     kelas = "../models/coco.names"

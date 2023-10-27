@@ -1,4 +1,10 @@
 from AnalyticClient import AnalyticClient
+import requests
+
+# urlApi = ""
+# params = {'key':'value'}
+# r = requests.get(url= urlApi, params= params)
+# response = r.json()
 
 dataKamera = [
     {
@@ -9,7 +15,7 @@ dataKamera = [
     {
         "ip": "localhost",
         "port": "6661",
-        "rtsp": "rtsp://admin:rastek123@10.50.0.13/cam/realmonitor?channel=1&subtype=00",
+        "rtsp": "rtsp://admin:rastek123@10.50.0.15/cam/realmonitor?channel=1&subtype=00",
     },
 ]
 

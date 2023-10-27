@@ -1,0 +1,26 @@
+{
+   "id": "65323cd2e1c98be3d5a3355d",
+   "name": "ATSS OpenVINO FP32",
+   "version": 11,
+   "creation_date": "2023-10-20T08:39:46.886000+00:00",
+   "model_format": "OpenVINO",
+   "precision": [
+      "FP32"
+   ],
+   "has_xai_head": false,
+   "target_device": "CPU",
+   "target_device_type": null,
+   "performance": {
+      "score": 0.8999999999999999
+   },
+   "size": 19748460,
+   "latency": 0,
+   "fps_throughput": 0,
+   "optimization_type": "MO",
+   "optimization_objectives": {},
+   "model_status": "SUCCESS",
+   "configurations": [],
+   "previous_revision_id": "65323cd2e1c98be3d5a3355b",
+   "previous_trained_revision_id": "65323cd2e1c98be3d5a3355b",
+   "optimization_methods": []
+}
