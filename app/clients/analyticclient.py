@@ -1,12 +1,4 @@
 import sys
-sys.path.append('/home/rastekid/Projects/GETI/Code')
-sys.path.insert(0, '../')
-from analytics.trackers.centroidtracker import CentroidTracker
-from analytics.trackers.trackableobject import TrackableObject
-
-from imutils.video import FPS
-from geti_sdk.deployment import Deployment
-
 import logging
 import imutils
 import dlib
@@ -16,8 +8,14 @@ import time
 import cv2
 import zmq
 import base64
-
 import configs.helper as helper
+
+sys.path.append('/home/rastekid/Projects/GETI/Code')
+sys.path.insert(0, '../')
+from analytics.trackers.centroidtracker import CentroidTracker
+from analytics.trackers.trackableobject import TrackableObject
+from imutils.video import FPS
+from geti_sdk.deployment import Deployment
 
 logging.basicConfig(level = logging.INFO, format = "[INFO] %(message)s")
 logger = logging.getLogger(__name__)
@@ -26,8 +24,8 @@ class AnalyticClient:
     port = "6000"
     ip = "127.0.0.1"
     rtsp = 0
-    deployment = "../Analytic/Deployment-JPO People detection"
-    tmp ="../tmp/people_counting/"
+    deployment = "../analytics/models/Deployment-JPO People detection"
+    tmp ="../static/tmp/people_counting/"
     det_duration = 5
     status = 1
     lokasi_kamera = "Bundaran Senayan"
@@ -229,4 +227,3 @@ class AnalyticClient:
         offline_deployment.load_inference_models(device="CPU")
         
         self.people_counter(self.rtsp, offline_deployment)
-
