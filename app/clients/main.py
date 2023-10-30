@@ -1,4 +1,4 @@
-from AnalyticClient import AnalyticClient
+from app.clients.analyticclient import AnalyticClient
 import requests
 
 # urlApi = ""
