@@ -1,0 +1,22 @@
+{
+    "model": [
+        {
+            "detection": "people_counting",
+            "deployment" : "/home/refky/websocket/live-stream-zeromq/Analytic/Deployment-JPO People detection",
+            "tmp" : "/home/refky/websocket/live-stream-zeromq/tmp/people_counting/",
+            "det_duration" : 5
+        },
+        {
+            "detection": "lean",
+            "deployment" : "/home/refky/websocket/live-stream-zeromq/Analytic/Deployment-JPO_Lean",
+            "tmp" : "/home/refky/websocket/live-stream-zeromq/tmp/lean/",
+            "det_duration" : 5
+        },
+        {
+            "detection": "jumping",
+            "deployment" : "/home/refky/websocket/live-stream-zeromq/Analytic/Deployment-JPO People detection",
+            "tmp" : "/home/refky/websocket/live-stream-zeromq/tmp/jumping/",
+            "det_duration" : 5
+        }
+    ]
+  }
