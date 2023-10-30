@@ -1,0 +1,61 @@
+{
+   "id": "65279d051463ea268c132ce4",
+   "name": "JPO People detection",
+   "creation_time": "2023-10-12T07:15:17.731000+00:00",
+   "creator_id": "teguh@rastek.id",
+   "pipeline": {
+      "tasks": [
+         {
+            "id": "65279d051463ea268c132ce5",
+            "title": "Dataset",
+            "task_type": "dataset"
+         },
+         {
+            "id": "65279d051463ea268c132ce8",
+            "title": "Detection task",
+            "task_type": "detection",
+            "labels": [
+               {
+                  "id": "65279d051463ea268c132ceb",
+                  "name": "people",
+                  "is_anomalous": false,
+                  "color": "#80e9afff",
+                  "hotkey": "",
+                  "is_empty": false,
+                  "group": "Detection labels",
+                  "parent_id": null
+               },
+               {
+                  "id": "65279d051463ea268c132cef",
+                  "name": "No Object",
+                  "is_anomalous": false,
+                  "color": "#000000ff",
+                  "hotkey": "",
+                  "is_empty": true,
+                  "group": "No Object",
+                  "parent_id": null
+               }
+            ],
+            "label_schema_id": "65279d051463ea268c132cf1"
+         }
+      ],
+      "connections": [
+         {
+            "from": "65279d051463ea268c132ce5",
+            "to": "65279d051463ea268c132ce8"
+         }
+      ]
+   },
+   "datasets": [
+      {
+         "id": "65279d051463ea268c132cec",
+         "name": "Dataset",
+         "use_for_training": true,
+         "creation_time": "2023-10-12T07:15:17.731000+00:00"
+      }
+   ],
+   "thumbnail": "/api/v1/workspaces/64f19c1f671f97951918ec2f/projects/65279d051463ea268c132ce4/thumbnail",
+   "performance": {
+      "score": 0.8999999999999999
+   }
+}

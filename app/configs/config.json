@@ -1,0 +1,94 @@
+{
+    "cameras": [
+        {
+            "id": 1,
+            "rtsp_url": 0,
+            "zmq_address": "tcp://*:6660",
+            "address": "tcp://localhost:6660",
+            "status": 1,
+            "lokasi_kamera": "Bundaran Senayan",
+            "deployment" : "/home/ilyas/Project/Rastek/ZeroMQ/app/analytics/models/Deployment-JPO People detection",
+            "tmp" : "/home/ilyas/Project/Rastek/ZeroMQ/app/static/tmp/people_counting/",
+            "det_duration" : 5
+        },
+        {
+            "id": 2,
+            "rtsp_url": "rtsp://admin:rastek123@10.50.0.15/cam/realmonitor?channel=1&subtype=00",
+            "zmq_address": "tcp://*:6661",
+            "address": "tcp://localhost:6661",
+            "status": 1,
+            "lokasi_kamera": "Bundaran Senayan",
+            "deployment" : "/home/ilyas/Project/Rastek/ZeroMQ/app/analytics/models/Deployment-JPO People detection",
+            "tmp" : "/home/ilyas/Project/Rastek/ZeroMQ/app/static/tmp/people_counting/",
+            "det_duration" : 5
+        },
+        {
+            "id": 3,
+            "rtsp_url": "rtsp://admin:rastek123@10.50.0.15/cam/realmonitor?channel=1&subtype=00",
+            "zmq_address": "tcp://*:6662",
+            "address": "tcp://localhost:6662",
+            "status": 1,
+            "lokasi_kamera": "Bundaran Senayan",
+            "deployment" : "/home/ilyas/Project/Rastek/ZeroMQ/app/analytics/models/Deployment-JPO People detection",
+            "tmp" : "/home/ilyas/Project/Rastek/ZeroMQ/app/static/tmp/people_counting/",
+            "det_duration" : 5
+        },
+        {
+            "id": 4,
+            "rtsp_url": "rtsp://admin:rastek123@10.50.0.15/cam/realmonitor?channel=1&subtype=00",
+            "zmq_address": "tcp://*:6663",
+            "address": "tcp://localhost:6663",
+            "status": 1,
+            "lokasi_kamera": "Bundaran Senayan",
+            "deployment" : "/home/ilyas/Project/Rastek/ZeroMQ/app/analytics/models/Deployment-JPO People detection",
+            "tmp" : "/home/ilyas/Project/Rastek/ZeroMQ/app/static/tmp/people_counting/",
+            "det_duration" : 5
+        },
+        {
+            "id": 5,
+            "rtsp_url": "rtsp://admin:rastek123@10.50.0.15/cam/realmonitor?channel=1&subtype=00",
+            "zmq_address": "tcp://*:6664",
+            "address": "tcp://localhost:6664",
+            "status": 1,
+            "lokasi_kamera": "Polda",
+            "deployment" : "/home/ilyas/Project/Rastek/ZeroMQ/app/analytics/models/Deployment-JPO People detection",
+            "tmp" : "/home/ilyas/Project/Rastek/ZeroMQ/app/static/tmp/people_counting/",
+            "det_duration" : 5
+        },
+        {
+            "id": 6,
+            "rtsp_url": "rtsp://admin:rastek123@10.50.0.15/cam/realmonitor?channel=1&subtype=00",
+            "zmq_address": "tcp://*:6665",
+            "address": "tcp://localhost:6665",
+            "status": 1,
+            "lokasi_kamera": "Polda",
+            "deployment" : "/home/ilyas/Project/Rastek/ZeroMQ/app/analytics/models/Deployment-JPO People detection",
+            "tmp" : "/home/ilyas/Project/Rastek/ZeroMQ/app/static/tmp/people_counting/",
+            "det_duration" : 5
+        },
+        {
+            "id": 7,
+            "rtsp_url": "rtsp://admin:rastek123@10.50.0.15/cam/realmonitor?channel=1&subtype=00",
+            "zmq_address": "tcp://*:6666",
+            "address": "tcp://localhost:6666",
+            "status": 1,
+            "lokasi_kamera": "Polda",
+            "deployment" : "/home/ilyas/Project/Rastek/ZeroMQ/app/analytics/models/Deployment-JPO People detection",
+            "tmp" : "/home/ilyas/Project/Rastek/ZeroMQ/app/static/tmp/people_counting//",
+            "det_duration" : 5
+        },
+        {
+            "id": 8,
+            "rtsp_url": "rtsp://admin:rastek123@10.50.0.15/cam/realmonitor?channel=1&subtype=00",
+            "zmq_address": "tcp://*:6667",
+            "address": "tcp://localhost:6667",
+            "status": 1,
+            "lokasi_kamera": "Polda",
+            "deployment" : "/home/ilyas/Project/Rastek/ZeroMQ/app/analytics/models/Deployment-JPO People detection",
+            "tmp" : "/home/ilyas/Project/Rastek/ZeroMQ/app/static/tmp/people_counting/",
+            "det_duration" : 5
+        }
+    ],
+    "client_folder": "client/",
+    "python_env": "python3"
+  }

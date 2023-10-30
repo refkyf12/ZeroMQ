@@ -1,0 +1,270 @@
+@font-face {
+	font-family: 'Roboto';
+	src: url('../fonts/Roboto-Light.ttf');
+}
+
+html,
+body {
+	padding: 0;
+	margin: 0;
+	height: 100%;
+}
+
+body {
+	font-size: 16px;
+	/* font-family: Roboto, HelveticaNeue-Light, 'Calibri Light'; */
+}
+
+.floatingDiv {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	overflow: hidden;
+	min-height: 400px;
+	min-width: 500px;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	border-radius: 8px;
+	border-color: #3b5998;
+	border-width: 2px;
+	border-style: solid;
+	-webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+	-moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+	box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+	background-color: rgb(235,235,235);
+}
+
+.floatingDiv .title {
+	width: 100%;
+	height: 30px;
+	line-height: 30px;
+	padding-left: 5px;
+	color: white;
+	background-color: #3b5998;
+}
+
+input[type='button'] {
+	background-color: #3b5998;
+	color: white;
+	border: none;
+	padding: 5px;
+	min-width: 80px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+}
+input[type='password'], input[type='text'] {
+	border-style: solid;
+	border-width: 1px;
+	border-color: #3b5998;
+	border-spacing: 10px;
+	border-radius: 4px;
+	height: 20px;
+}
+
+.topPanel {
+	color: white;
+	padding-right: 30px;
+  padding-left: 30px;
+	box-sizing: border-box;
+  background-color: #576CBC;
+  height: 52px;
+  border: none;
+	border-bottom-color: #576CBC;
+	border-bottom-width: 3px;
+	border-bottom-style: solid;
+  -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+	-moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+	box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+  position: relative;
+}
+
+.container {
+    margin: 0 auto; 
+	height: 100%;
+	width: 100%;
+    display: flex;
+	flex-direction: row;
+}
+
+.customButton{
+	margin-top: 5px;
+	margin-left: 10px;
+	background-color: red;
+	color: white;
+	border: none;
+	padding: 5px 10px;
+}
+
+.customButtonFullScreen{
+	margin-top: 5px;
+	margin-left: 10px;
+	background-color: #576cbc;
+	color: white;
+	border: none;
+	padding: 5px 10px;
+}
+
+.sideBar {
+	width: 350px;
+	height: 100%;
+	overflow-y: auto;
+	border: none;
+	border-right-color: #19376D;
+	border-right-width: 3px;
+	border-right-style: solid;
+	background-color: #19376D;
+	-webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+	-moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+	box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+	text-align: center;
+	
+}
+
+.blackBox {
+    width: 100%;
+    height: 100%;
+    /* background-color: black; */
+}
+
+.topPanelTitle {
+	color: white;
+	font-weight: 600;
+}
+
+.blackBox table {
+	width: 100%;
+	border-collapse: collapse;
+	width: 280px;
+	height: 240px;
+}
+
+.blackBox td {
+	/* border: 1px solid #000; */
+	padding-left: 10px;
+	padding-right: 10px;
+	text-align: center;
+}
+
+.back-button {
+	background-color: transparent; /* Warna latar belakang tombol */
+	color: white; /* Warna teks tombol */
+	padding: 10px 20px; /* Padding tombol */
+	border: none; /* Hilangkan batas tombol */
+	border-radius: 5px; /* Buat sudut tombol melengkung */
+	cursor: pointer; /* Ganti kursor saat di atas tombol */
+}
+
+.sideBar .cameraPanel {
+	border-color: #3b5998;
+	border-style: solid;
+	height: 130px;
+	border-width: 2px;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+	background-color: white;
+	-webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+	-moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+	box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+	margin-top: 35px;
+	margin-bottom: 35px;
+	margin-right: 35px;
+	overflow: hidden;
+	align-items: start;
+}
+
+.cameraPanel .title {
+	width: 100%;
+	height: 30px;
+	line-height: 30px;
+	text-align: left;
+	padding-left: 5px;
+	/* font-family: Roboto; */
+	font-weight: 300;
+	color: white;
+	background-color: #3b5998;
+
+}
+
+table.cameraPanelOption td {
+	width: 120px;
+	height: 68px;
+}
+
+.cameraPanel .snapShot {
+	width: 230px;
+	height: 230px;
+	border-radius: 4px;
+}
+.cameraPanel .cameraPanelOption {
+	padding: 5px;
+	margin-top: 5px;
+}
+
+.videoLive {
+	width: 100%;
+	height: 95%;
+	margin: auto;
+}
+.videoScrub {
+	width: 100%;
+	height: 70%;
+	margin: auto;
+}
+
+.ui-dialog-buttonset {
+	font-size: 12px;
+}
+
+.videoButton {
+	width: 100%;
+	height: 30px;
+	margin-bottom: 5px;
+}
+
+.ui-widget.ui-widget-content{
+	border: 2px solid #3b5998 !important;
+	overflow: hidden !important;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+	padding: 0px;
+	-webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+	-moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+	box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+}
+
+.ui-widget-header{
+	border: none !important;
+	background: #3b5998 !important;
+	color: white !important;
+	font-weight: normal !important;
+	border-radius: 0px !important;
+}
+
+.floor-card {
+    border: 1px solid #ccc;
+    margin: 10px;
+    max-width: 300px;
+}
+
+.card-header {
+    background-color: #576CBC;
+    padding: 10px;
+	border-radius: 50px;
+    cursor: pointer;
+    font-weight: bold;
+	color: #fff;
+    user-select: none;
+}
+
+.card-content {
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    background-color: #fff;
+	width: auto;
+	align-items: start;
+}
+

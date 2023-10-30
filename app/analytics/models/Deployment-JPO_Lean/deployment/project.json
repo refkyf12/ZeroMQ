@@ -1,0 +1,61 @@
+{
+   "id": "652f89fb53374a5725ac81ce",
+   "name": "JPO_Lean",
+   "creation_time": "2023-10-18T07:32:11.467000+00:00",
+   "creator_id": "teguh@rastek.id",
+   "pipeline": {
+      "tasks": [
+         {
+            "id": "652f89fb53374a5725ac81cf",
+            "title": "Dataset",
+            "task_type": "dataset"
+         },
+         {
+            "id": "652f89fb53374a5725ac81d2",
+            "title": "Detection task",
+            "task_type": "detection",
+            "labels": [
+               {
+                  "id": "652f89fb53374a5725ac81d5",
+                  "name": "lean",
+                  "is_anomalous": false,
+                  "color": "#25a18eff",
+                  "hotkey": "",
+                  "is_empty": false,
+                  "group": "Detection labels",
+                  "parent_id": null
+               },
+               {
+                  "id": "652f89fb53374a5725ac81d9",
+                  "name": "No Object",
+                  "is_anomalous": false,
+                  "color": "#000000ff",
+                  "hotkey": "",
+                  "is_empty": true,
+                  "group": "No Object",
+                  "parent_id": null
+               }
+            ],
+            "label_schema_id": "652f89fb53374a5725ac81db"
+         }
+      ],
+      "connections": [
+         {
+            "from": "652f89fb53374a5725ac81cf",
+            "to": "652f89fb53374a5725ac81d2"
+         }
+      ]
+   },
+   "datasets": [
+      {
+         "id": "652f89fb53374a5725ac81d6",
+         "name": "Dataset",
+         "use_for_training": true,
+         "creation_time": "2023-10-18T07:32:11.466000+00:00"
+      }
+   ],
+   "thumbnail": "/api/v1/workspaces/64f19c1f671f97951918ec2f/projects/652f89fb53374a5725ac81ce/thumbnail",
+   "performance": {
+      "score": 1.0
+   }
+}
