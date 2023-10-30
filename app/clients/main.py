@@ -1,4 +1,4 @@
-from app.clients.analyticclient import AnalyticClient
+from analyticclient import AnalyticClient
 import requests
 
 # urlApi = ""
@@ -11,8 +11,8 @@ dataKamera = [
         "ip": "localhost",
         "port": "6660",
         "rtsp": "rtsp://admin:rastek123@10.50.0.13/cam/realmonitor?channel=1&subtype=00",
-        "deployment": "../Analytic/Deployment-JPO People detection",
-        "tmp": "../tmp/people_counting/",
+        "deployment": "../analytics/models/Deployment-JPO People detection",
+        "tmp": "../static/tmp/people_counting/",
         "det_duration": 5,
         "status": 1,
         "lokasi_kamera": "Bundaran Senayan",
