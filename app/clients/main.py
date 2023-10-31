@@ -2,7 +2,7 @@ import requests
 import json
 import threading
 import sys
-import analyticclient as AnalyticClient
+from analyticclient import AnalyticClient
 
 sys.path.append("../../")
 import app.configs.config as conf
@@ -10,58 +10,65 @@ import app.configs.config as conf
 with open('../configs/configModel.json', 'r') as config_file:
     config = json.load(config_file)
 
+dataKamera = conf.getDataKamera()
+dataKameraLean = conf.getDataKameraPeopleLean()
+dataKameraPeopleCount = conf.getDataKameraPeopleCount()
+dataKameraJump = conf.getDataKameraPeopleJump()
 
-print(conf.getDataKameraPeopleCount())
+# print("data semua kamera",dataKamera)
+# print("data semua kamera jump",dataKameraJump)
+# print("data semua kamera lean",dataKameraLean)
+# print("data semua kamera people count",dataKameraPeopleCount)
 
-# def run_dataKameraLean():
-#     for kamera in dataKameraLean:
-#         detection = "lean"
-#         model = list(filter(lambda x: x["detection"] == detection, config["model"]))[0]
-#         deployment = model["deployment"]
-#         tmp = model["tmp"]
-#         det_duration = model["det_duration"]
-#         print(kamera["ip"])
-#         tempAnalytic = AnalyticClient()
-#         tempAnalytic.setIp(kamera["ip"])
-#         tempAnalytic.setPort(kamera["port"])
-#         tempAnalytic.setRtsp(kamera["rtsp"])
-#         tempAnalytic.setDeployment(deployment)
-#         tempAnalytic.setTmp(tmp)
-#         tempAnalytic.setDetDuration(det_duration)
-#         tempAnalytic.setStatus(kamera["status"])
-#         tempAnalytic.setLokasiKamera(kamera["lokasi_kamera"])
-#         tempAnalytic.start()
-#         listAnalytic.append(tempAnalytic)
+def run_dataKameraLean():
+    port = 666
+    for kamera in dataKameraLean:
+        for i in range(len(kamera)):
+            detection = "lean"
+            model = list(filter(lambda x: x["detection"] == detection, config["model"]))[0]
+            deployment = model["deployment"]
+            tmp = model["tmp"]
+            det_duration = model["det_duration"]
+            tempAnalytic = AnalyticClient()
+            tempAnalytic.setIp("127.0.0.1")
+            tempAnalytic.setPort(int(str(port) + str(i)))
+            tempAnalytic.setRtsp(kamera["url"])
+            tempAnalytic.setDeployment(deployment)
+            tempAnalytic.setTmp(tmp)
+            tempAnalytic.setDetDuration(det_duration)
+            tempAnalytic.setLokasiKamera(kamera["location"])
+            tempAnalytic.start()
+            listAnalytic.append(tempAnalytic)
 
-# def run_dataKameraPeopleCounting():
-#     for kameraPeople in dataKameraPeopleCounting:
-#         detection = "people_counting"
-#         model = list(filter(lambda x: x["detection"] == detection, config["model"]))[0]
-#         deployment = model["deployment"]
-#         tmp = model["tmp"]
-#         det_duration = model["det_duration"]
-#         print(kameraPeople["port"])
-#         peopleCounting = AnalyticClient()
-#         peopleCounting.setIp(kameraPeople["ip"])
-#         peopleCounting.setPort(kameraPeople["port"])
-#         peopleCounting.setRtsp(kameraPeople["rtsp"])
-#         peopleCounting.setDeployment(deployment)
-#         peopleCounting.setTmp(tmp)
-#         peopleCounting.setDetDuration(det_duration)
-#         peopleCounting.setStatus(kameraPeople["status"])
-#         peopleCounting.setLokasiKamera(kameraPeople["lokasi_kamera"])
-#         peopleCounting.start()
-#         listAnalytic.append(peopleCounting)  
+def run_dataKameraPeopleCounting():
+    port = 777
+    for kameraPeople in dataKameraPeopleCount:
+        for i in range(len(kameraPeople)):
+            detection = "people_counting"
+            model = list(filter(lambda x: x["detection"] == detection, config["model"]))[0]
+            deployment = model["deployment"]
+            tmp = model["tmp"]
+            det_duration = model["det_duration"]
+            peopleCounting = AnalyticClient()
+            peopleCounting.setIp("127.0.0.1")
+            peopleCounting.setPort(int(str(port) + str(i)))
+            peopleCounting.setRtsp(kameraPeople["url"])
+            peopleCounting.setDeployment(deployment)
+            peopleCounting.setTmp(tmp)
+            peopleCounting.setDetDuration(det_duration)
+            peopleCounting.setLokasiKamera(kameraPeople["location"])
+            peopleCounting.start()
+            listAnalytic.append(peopleCounting)  
 
 
-# if __name__ == "__main__":
-#     listAnalytic = []
+if __name__ == "__main__":
+    listAnalytic = []
     
-#     thread_dataKameraLean = threading.Thread(target=run_dataKameraLean)
-#     thread_dataKameraPeopleCounting = threading.Thread(target=run_dataKameraPeopleCounting)
+    thread_dataKameraLean = threading.Thread(target=run_dataKameraLean)
+    thread_dataKameraPeopleCounting = threading.Thread(target=run_dataKameraPeopleCounting)
 
-#     thread_dataKameraLean.start()
-#     thread_dataKameraPeopleCounting.start()
+    thread_dataKameraLean.start()
+    thread_dataKameraPeopleCounting.start()
 
-#     thread_dataKameraLean.join()
-#     thread_dataKameraPeopleCounting.join()
+    thread_dataKameraLean.join()
+    thread_dataKameraPeopleCounting.join()

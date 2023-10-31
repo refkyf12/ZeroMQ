@@ -46,7 +46,7 @@ def getDataKameraPeopleLean():
             dataKameraLean.append(item)
     return dataKameraLean
 
-def getDataKameraPeopleCount():
+def getDataKameraPeopleJump():
     #Get Data Jump Cam
     params = {'analyticId':'PPLJMP'}
     r = requests.get(url= urlApiSensor, params= params)
