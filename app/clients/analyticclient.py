@@ -8,10 +8,9 @@ import time
 import cv2
 import zmq
 import base64
+sys.path.append('../')
 import configs.helper as helper
 
-sys.path.append('/home/rastekid/Projects/GETI/Code')
-sys.path.insert(0, '../')
 from analytics.trackers.centroidtracker import CentroidTracker
 from analytics.trackers.trackableobject import TrackableObject
 from imutils.video import FPS
