@@ -4,30 +4,60 @@ import threading
 
 from analyticclient import AnalyticClient
 
-# urlApi = ""
-# params = {'key':'value'}
-# r = requests.get(url= urlApi, params= params)
-# response = r.json()
+urlApiSensor = 'http://202.180.16.237:28080/master/api/sensor'
+urlApiCamera = 'http://202.180.16.237:28080/master/api/camera'
+dataKameraPeopleCounting = []
+dataKameraLean = []
+dataKameraJump = []
 
-dataKameraLean = [
-    {
-        "ip": "localhost",
-        "port": "6660",
-        "rtsp": "/home/refky/websocket/live-stream-zeromq/testVideo/1.avi",
-        "status": 1,
-        "lokasi_kamera": "Bundaran Senayan",
-    },
-]
+#Get Data People Count Cam
+params = {'analyticId':'PPLCNT'}
+r = requests.get(url= urlApiSensor, params= params)
+response = r.json()
 
-dataKameraPeopleCounting = [
-    {
-        "ip": "localhost",
-        "port": "6661",
-        "rtsp": "/home/refky/websocket/live-stream-zeromq/testVideo/1.avi",
-        "status": 1,
-        "lokasi_kamera": "Polda",
-    },
-]
+response_data = response['data']
+cam_ids = [item['camId'] for item in response_data]
+
+for cam_id in cam_ids:
+    params = {'id': cam_id}
+    r = requests.get(url=urlApiCamera, params=params)
+    response_people_count = r.json()
+
+    for item in response_people_count['data']:
+        dataKameraPeopleCounting.append(item)
+
+#Get Data Lean Cam
+params = {'analyticId':'PPLLEN'}
+r = requests.get(url= urlApiSensor, params= params)
+response = r.json()
+
+response_data = response['data']
+cam_ids = [item['camId'] for item in response_data]
+
+for cam_id in cam_ids:
+    params = {'id': cam_id}
+    r = requests.get(url=urlApiCamera, params=params)
+    response_lean = r.json()
+
+    for item in response_lean['data']:
+        dataKameraLean.append(item)
+
+
+#Get Data Jump Cam
+params = {'analyticId':'PPLJMP'}
+r = requests.get(url= urlApiSensor, params= params)
+response = r.json()
+
+response_data = response['data']
+cam_ids = [item['camId'] for item in response_data]
+
+for cam_id in cam_ids:
+    params = {'id': cam_id}
+    r = requests.get(url=urlApiCamera, params=params)
+    response_lean = r.json()
+
+    for item in response_lean['data']:
+        dataKameraJump.append(item)
 
 with open('../config/configModel.json', 'r') as config_file:
     config = json.load(config_file)
@@ -71,8 +101,7 @@ def run_dataKameraPeopleCounting():
         peopleCounting.setStatus(kameraPeople["status"])
         peopleCounting.setLokasiKamera(kameraPeople["lokasi_kamera"])
         peopleCounting.start()
-        listAnalytic.append(peopleCounting)
-        
+        listAnalytic.append(peopleCounting)  
 
 
 if __name__ == "__main__":

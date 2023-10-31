@@ -24,8 +24,8 @@ class AnalyticClient:
     port = "6000"
     ip = "127.0.0.1"
     rtsp = 0
-    deployment = "../analytics/models/Deployment-JPO People detection"
-    tmp ="../static/tmp/people_counting/"
+    deployment = "../Analytic/Deployment-JPO People detection"
+    tmp ="../tmp/people_counting/"
     det_duration = 5
     status = 1
     lokasi_kamera = "Bundaran Senayan"
