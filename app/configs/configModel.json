@@ -14,7 +14,7 @@
         },
         {
             "detection": "jumping",
-            "deployment" : "/home/refky/websocket/live-stream-zeromq/app/analytics/models/Deployment-JPO People detection",
+            "deployment" : "/home/refky/websocket/live-stream-zeromq/app/analytics/models/Deployment-JPO_Jump_No_Jump",
             "tmp" : "/home/refky/websocket/live-stream-zeromq/tmp/jumping/",
             "det_duration" : 5
         }

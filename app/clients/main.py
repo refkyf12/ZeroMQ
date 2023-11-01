@@ -40,6 +40,26 @@ def run_dataKameraLean():
             tempAnalytic.start()
             listAnalytic.append(tempAnalytic)
 
+def run_dataKameraJump():
+    port = 888
+    for kameraJump in dataKameraJump:
+        for i in range(len(kameraJump)):
+            detection = "jump"
+            model = list(filter(lambda x: x["detection"] == detection, config["model"]))[0]
+            deployment = model["deployment"]
+            tmp = model["tmp"]
+            det_duration = model["det_duration"]
+            tempAnalytic = AnalyticClient()
+            tempAnalytic.setIp("127.0.0.1")
+            tempAnalytic.setPort(int(str(port) + str(i)))
+            tempAnalytic.setRtsp(kameraJump["url"])
+            tempAnalytic.setDeployment(deployment)
+            tempAnalytic.setTmp(tmp)
+            tempAnalytic.setDetDuration(det_duration)
+            tempAnalytic.setLokasiKamera(kameraJump["location"])
+            tempAnalytic.start()
+            listAnalytic.append(tempAnalytic)
+
 def run_dataKameraPeopleCounting():
     port = 777
     for kameraPeople in dataKameraPeopleCount:
@@ -66,9 +86,12 @@ if __name__ == "__main__":
     
     thread_dataKameraLean = threading.Thread(target=run_dataKameraLean)
     thread_dataKameraPeopleCounting = threading.Thread(target=run_dataKameraPeopleCounting)
+    thread_dataKameraJump = threading.Thread(target=run_dataKameraJump)
 
     thread_dataKameraLean.start()
     thread_dataKameraPeopleCounting.start()
+    thread_dataKameraJump.start()
 
     thread_dataKameraLean.join()
     thread_dataKameraPeopleCounting.join()
+    thread_dataKameraJump.join()

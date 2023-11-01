@@ -1,0 +1,71 @@
+{
+   "id": "6530d3df0d4a60a1b8ad4f6f",
+   "name": "JPO_Jump_No_Jump",
+   "creation_time": "2023-10-19T06:59:43.693000+00:00",
+   "creator_id": "teguh@rastek.id",
+   "pipeline": {
+      "tasks": [
+         {
+            "id": "6530d3df0d4a60a1b8ad4f70",
+            "title": "Dataset",
+            "task_type": "dataset"
+         },
+         {
+            "id": "6530d3df0d4a60a1b8ad4f73",
+            "title": "Detection task",
+            "task_type": "detection",
+            "labels": [
+               {
+                  "id": "6530d3df0d4a60a1b8ad4f76",
+                  "name": "Jump",
+                  "is_anomalous": false,
+                  "color": "#edb200ff",
+                  "hotkey": "",
+                  "is_empty": false,
+                  "group": "Detection labels",
+                  "parent_id": null
+               },
+               {
+                  "id": "6530d3df0d4a60a1b8ad4f77",
+                  "name": "No Jump",
+                  "is_anomalous": false,
+                  "color": "#80e9afff",
+                  "hotkey": "",
+                  "is_empty": false,
+                  "group": "Detection labels",
+                  "parent_id": null
+               },
+               {
+                  "id": "6530d3df0d4a60a1b8ad4f7b",
+                  "name": "No Object",
+                  "is_anomalous": false,
+                  "color": "#000000ff",
+                  "hotkey": "",
+                  "is_empty": true,
+                  "group": "No Object",
+                  "parent_id": null
+               }
+            ],
+            "label_schema_id": "6530d3df0d4a60a1b8ad4f7d"
+         }
+      ],
+      "connections": [
+         {
+            "from": "6530d3df0d4a60a1b8ad4f70",
+            "to": "6530d3df0d4a60a1b8ad4f73"
+         }
+      ]
+   },
+   "datasets": [
+      {
+         "id": "6530d3df0d4a60a1b8ad4f78",
+         "name": "Dataset",
+         "use_for_training": true,
+         "creation_time": "2023-10-19T06:59:43.693000+00:00"
+      }
+   ],
+   "thumbnail": "/api/v1/workspaces/64f19c1f671f97951918ec2f/projects/6530d3df0d4a60a1b8ad4f6f/thumbnail",
+   "performance": {
+      "score": 1.0
+   }
+}
